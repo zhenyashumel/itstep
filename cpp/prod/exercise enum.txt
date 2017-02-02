@@ -1,0 +1,52 @@
+#include <iostream> 
+using namespace std; 
+int main() 
+{ 
+setlocale(0, ""); 
+const int size = 10; 
+int a[size]; 
+for (int i = 0; i < size; i++) 
+{ 
+cout « "Введите оценку " « i « endl; 
+cin » a[i]; 
+} 
+system("cls"); 
+enum menu {one=1,two,three}; 
+int c = 1; 
+while (c != 0) 
+{ 
+cout « "1. Вывести оценки\n 2. Пересдача экзамена\n 3. Выходит ли стипендия\n 4. Выход" « endl; 
+cin » c; 
+switch (c) 
+{ 
+case 1: { cout « "Ваши оценки:"; 
+for (int i = 0; i < size; i++) 
+
+cout « a[i] « " "; 
+break; 
+} 
+case 2: 
+{ 
+cout « "Введите номер элемента массива и новую оценку"; 
+int num, y; 
+cin » num » y; 
+a[num] = y; 
+break; 
+} 
+case 3: 
+{ 
+int sr=0; 
+for (int i = 0; i < size; i++) 
+{ 
+sr = sr + a[i]; 
+} 
+double sr1 = sr / 10; 
+
+
+
+} 
+
+} 
+
+return 0; 
+}
