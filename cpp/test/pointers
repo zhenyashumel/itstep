@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+int* ex2(int *a, int *b)
+{
+	if (*a < *b) return a;
+	else  return b;
+}
+int main()
+{//ex2
+	
+	setlocale(0, "");
+	cout << "Введите 2 числа ";
+	int a, b;
+	cin >> a >> b;
+	int *ptra = &a,*ptrb=&b;
+	cout << "Адрес а =" << ptra << "\n Адрес b= " << ptrb<<endl;
+	cout<< ex2(ptra, ptrb);
+
+
+}
+
+	//ex1
+	/*
+	setlocale(0, "");
+	int a, b;
+	cout << "Введите 2 числа ";
+	cin >> a >> b;
+	int *pra=&a, *prb=&b;
+	cout << "Расстояние между переменными = " << pra - prb<< endl;
+	return 0; */
