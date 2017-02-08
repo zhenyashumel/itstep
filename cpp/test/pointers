@@ -28,3 +28,20 @@ int main()
 	int *pra=&a, *prb=&b;
 	cout << "Расстояние между переменными = " << pra - prb<< endl;
 	return 0; */
+
+ex3
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	const int size = 10;
+	int a[size];
+	for (int i = 0; i < size; i++)
+	{
+		*(a+i) = rand() % 10;
+		cout << *(a + i) << endl;
+	}
+	return 0;
+
+}
