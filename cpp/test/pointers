@@ -45,3 +45,26 @@ int main()
 	return 0;
 
 }
+
+
+
+ex4
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	setlocale(0, "");
+	const int size = 10;
+	int a[size];
+	int sum = 0;
+	for (int i = 0; i < size; i++)
+	{
+		*(a + i) = rand() % 60 - 25;
+		sum += *(a + i);
+		cout << *(a + i) << " ";
+	}
+	cout << "Ссумма элементов =" << sum << endl;
+	return 0;
+}
