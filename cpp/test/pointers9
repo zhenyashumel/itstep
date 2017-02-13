@@ -1,0 +1,85 @@
+
+#include<iostream>
+#include<ctime>
+using namespace std;
+int *min(int*, int);
+int* give_memory(int*, int);
+int* free_memory(int*);
+void sort(int* , int );
+int *bin_search(int*, int, int);
+void sort1(int*, int);
+int main()
+{
+	setlocale(0, "");
+	int *ptr = NULL, size;
+	cout << "Введите размер массива\n";
+	cin >> size;
+	ptr = give_memory(ptr, size);
+	for (int i = 0; i < size; i++)
+    {
+		ptr[i] = rand() % 100;
+		cout << *(ptr + i)<<" ";
+    }
+	cout << endl;
+	sort1(ptr, size);
+	for (int i = 0; i < size; i++)
+	{
+		cout << *(ptr + i) << " ";
+	}
+	ptr = free_memory(ptr);
+	return 0;
+}
+
+int* give_memory(int*A, int size)
+{
+	A = (int*)malloc(size*sizeof(int));
+	return A;
+
+}
+int* free_memory(int* A)
+{
+	free(A);
+	A = NULL;
+	return A;
+}
+int *min(int*A, int size,int index)
+{
+	int *pmin=&A[index];
+	for (int* i = A + index; i < A + size; i++)
+	{
+		if (*i < *pmin) pmin = i;
+	}
+	return pmin;
+}
+void sort(int* A, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		int *pmin =min(A,size,i);
+		swap(A[i], *pmin);
+	}
+}
+int* bin_search(int* A, int size, int key)
+{
+	int right= size-1,left=0;
+	while (left < right)
+	{
+		int mid = (left + right) / 2;
+		if (key < A[mid]) right = mid;
+		else left = mid + 1;
+	}
+	return A + right;
+}
+void sort1(int*A, int size)
+{
+	int *temp;
+	for (int i = 1; i < size; i++)
+	{
+		temp = bin_search(A, i, A[i]);
+		for (int j = i ; A + j != temp; j--)
+		{
+			A[j] = A[j-1];
+		}
+		*temp = A[i];
+	}
+}
