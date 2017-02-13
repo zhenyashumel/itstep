@@ -1,0 +1,60 @@
+//ex8 homework
+#include<iostream>
+#include<ctime>
+using namespace std;
+int *min(int*, int);
+int* give_memory(int*, int);
+int* free_memory(int*);
+void sort(int* , int );
+int main()
+{
+	setlocale(0, "");
+	int *ptr = NULL, size;
+	cout << "Введите размер массива\n";
+	cin >> size;
+	ptr = give_memory(ptr, size);
+	for (size_t i = 0; i < size; i++)
+    {
+		ptr[i] = rand() % 100;
+		cout << *(ptr + i)<<" ";
+    }
+	cout << endl;
+	sort(ptr, size);
+	for (size_t i = 0; i < size; i++)
+	{
+		cout << *(ptr + i) << " ";
+	}
+	ptr = free_memory(ptr);
+	return 0;
+}
+
+int* give_memory(int*A, int size)
+{
+	A = (int*)malloc(size*sizeof(int));
+	return A;
+
+}
+int* free_memory(int* A)
+{
+	free(A);
+	A = NULL;
+	return A;
+}
+int *min(int*A, int size,int index)
+{
+	int *pmin=&A[index];
+	for (int* i = A + index; i < A + size; i++)
+	{
+		if (*i < *pmin) pmin = i;
+	}
+	return pmin;
+}
+void sort(int* A, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		int *pmin =min(A,size,i);
+		swap(A[i], *pmin);
+	}
+}
+
