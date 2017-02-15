@@ -1,0 +1,316 @@
+1.
+
+#include<iostream>
+using namespace std;
+int main()
+{
+	setlocale(0, "");
+	double n1, n2;
+	double*ptr_n1=&n1, *ptr_n2=&n2;
+	cout << ptr_n2 - ptr_n1<<endl;
+	return 0;
+}
+
+2.
+
+#include<iostream>
+using namespace std;
+int *min_chislo1(int*, int*);
+int main()
+{
+	setlocale(0, "");
+	int a, b;
+	cout << "Введите первое число -> ";
+	cin >> a;
+	cout << "Введите второе число -> ";
+	cin >> b;
+	int*ptr_a=&a, *ptr_b=&b;
+	cout << "Адрес 1 числа -> "<<ptr_a <<"\nАдрес 2 числа -> " << ptr_b << endl;
+	cout << "Адрес наименьшего числа -> "<<min_chislo1(ptr_a, ptr_b) << endl;
+	return 0;
+}
+
+int *min_chislo1(int *n1, int *n2)
+{
+	if (*n1 > *n2) return n2;
+	else return n1;
+}
+
+3.
+
+#include<iostream>
+using namespace std;
+int main()
+{
+	setlocale(0, "");
+	const int size_0 = 100;
+	int a[size_0], size;
+	int *ptr_a;
+	ptr_a = a;
+	cout << "Введите число элементов массива -> ";
+	cin >> size;
+	for (int i = 0; i < size; i++)
+	{
+		*(ptr_a + i) = rand() %50;
+	}
+	for (int i = 0; i < size; i++)
+	{
+		cout << "a[" << i << "]=" << ptr_a[i] << endl;
+	}
+	return 0;
+}
+
+4.
+
+#include<iostream>
+using namespace std;
+int main()
+{
+	setlocale(0, "");
+	const int size = 10;
+	int a[size], sum = 0;
+	int *ptr_a;
+	ptr_a = a;
+	for (int i = 0; i < size; i++)
+	{
+		*(ptr_a + i) = rand() % 60 - 25;
+		cout << "a[" << i << "]=" << ptr_a[i] << endl;
+	}
+	for (ptr_a; ptr_a <a + size; ptr_a++)
+	{
+		sum += *ptr_a;
+	}
+	cout << "Сумма элементов массива=" << sum << endl;
+	return 0;
+}
+
+5.
+
+#include<iostream>
+#include<ctime>
+using namespace std;
+int main()
+{
+	setlocale(0, "");
+	srand((unsigned)time(0));
+	const int size = 10;
+	int a[size];
+	long long pr = 1;
+	int *ptr_a;
+	ptr_a = a;
+	for (int i = 0; i < size; i++)
+	{
+		*(ptr_a + i) = rand() % 120 - 44;
+		cout << "a[" << i << "]=" << ptr_a[i] << endl;
+	}
+	for (ptr_a; ptr_a <a + size; ptr_a++)
+	{
+		pr *= *ptr_a;
+	}
+	cout << "Произведение элементов массива=" << pr << endl;
+	return 0;
+}
+
+6.
+
+#include<iostream>
+using namespace std;
+int* function(int*, int*, int, int);
+int main()
+{
+	setlocale(0, "");
+	const int size_a = 10, size_b = 3;
+	int a[size_a] = { 6, -2, 6, 0, -4, 7, -3, 2, 8, 9 }, b[size_b] = { 6, 0, -4 };
+	cout <<"Адрес начала фрагмента - "<< &a[2] << endl;
+	cout << "Адрес, который вернула функция - "<<function(a, b, size_a, size_b) << endl;
+	return 0;
+}
+
+int* function(int *ptr_0, int *ptr, int size_0, int size)
+{
+	int* ptr_x = NULL;
+	for (int i_0 = 0, i = 0; i_0 < size_0 && i < size;)
+	{
+		if (*(ptr_0+i_0) == *(ptr+i))
+		{
+			ptr_x = ptr_0+i_0;
+			i_0++;
+			i++;
+		}
+		else
+		{
+			ptr_x = NULL;
+			i_0++;
+			i = 0;
+		}
+	}
+	if (ptr_x == NULL) return ptr_x;
+	else return ptr_x - (size - 1);
+}
+
+7.
+
+#include<iostream>
+#include<ctime>
+using namespace std;
+int* function(int*, int);
+bool prostoe_chislo(int);
+int main()
+{
+	setlocale(0, "");
+	srand((unsigned)time(0));
+	const int size_0 = 100;
+	int a[size_0], size;
+	cout << "Введите количество элементов массива -> ";
+	cin >> size;
+	int*ptr_a = a;
+	for (int i = 0; i < size; i++)
+	{
+		*(ptr_a + i) = rand() % 50;
+		cout << "a[" << i << "]=" << ptr_a[i] << " ";
+	}
+	cout << endl;
+	int *x = function(a, size);
+	for (int i = 0; i < size; i++) cout << "a[" << i << "]=" << x[i] << endl;
+	return 0;
+}
+
+int* function(int *ptr, int size)
+{
+	int *ptr_n = ptr;
+	for (int i = 0, j = 0; i < size; i++)
+	{
+		if (prostoe_chislo(*(ptr+i))) continue;
+		else
+		{
+			*(ptr_n + j) = *(ptr + i);
+			j++;
+		}
+	}
+	return ptr_n;
+}
+
+bool prostoe_chislo(int chislo)
+{
+	bool pok = false;
+	if (chislo == 0 || chislo == 1) return pok;
+	int s = 0, n = 1;
+	while ((chislo != n) && (s < 1))
+	{
+		if (chislo / 2 < n) break;
+		n += 1;
+		if (chislo%n == 0) s += 1;
+	}
+	if (s == 0 || chislo == 2) pok = true;
+	return pok;
+}
+
+8.
+
+#include<iostream>
+#include<ctime>
+using namespace std;
+void sortirovka_viborom(int*, int);
+int* poisk_min(int*, int,int);
+int main()
+{
+	setlocale(0, "");
+	srand((unsigned)time(0));
+	const int size_0 = 100;
+	int a[size_0],size;
+	cout << "Введите количество элементов массива -> ";
+	cin >> size;
+	int*ptr_a = a;
+	for (int i = 0; i < size; i++)
+	{
+		*(ptr_a + i) = rand() % 50;
+		cout << "a[" << i << "]=" << ptr_a[i]<<" ";
+	}
+	cout << endl;
+	sortirovka_viborom(ptr_a, size);
+	for (int i = 0; i < size; i++)
+	{
+		cout << "a[" << i << "]=" << ptr_a[i] << " ";
+	}
+	cout << endl;
+	return 0;
+}
+
+void sortirovka_viborom(int*ptr, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		int temp = *(ptr + i);
+		int *ptr_min = poisk_min(ptr, i, size);
+		*(ptr + i) = *ptr_min;
+		*ptr_min = temp;
+	}
+}
+
+int* poisk_min(int*A,int ind, int size)
+{
+	int *ptr_min = &A[ind];
+	for (int i = ind+1; i<size; i++)
+	{
+		if (*(A + i) < *ptr_min) ptr_min = A + i;
+	}
+	return ptr_min;
+}
+
+9.
+
+#include<iostream>
+#include<ctime>
+using namespace std;
+void sortirovka_vstavkami(int*, int);
+int* poisk_binarniy(int*, int,int);
+int main()
+{
+	setlocale(0, "");
+	srand((unsigned)time(0));
+	const int size_0 = 100;
+	int a[size_0],size;
+	cout << "Введите количество элементов массива -> ";
+	cin >> size;
+	int*ptr_a = a;
+	for (int i = 0; i < size; i++)
+	{
+		*(ptr_a + i) = rand() % 50;
+		cout << "a[" << i << "]=" << ptr_a[i]<<" ";
+	}
+	cout << endl;
+	sortirovka_vstavkami(ptr_a, size);
+	for (int i = 0; i < size; i++)
+	{
+		cout << "a[" << i << "]=" << ptr_a[i] << " ";
+	}
+	cout << endl;
+	return 0;
+}
+
+void sortirovka_vstavkami(int*ptr, int size)
+{
+	int *ptr_pos;
+	for (int i = 1; i < size; i++)
+	{
+		int temp = ptr[i];
+		ptr_pos = poisk_binarniy(ptr, i, temp);
+		for (int j = i; (j + ptr) != ptr_pos; j--)
+		{
+			*(ptr + j) = *(ptr + j-1);
+		}
+		*ptr_pos = temp;
+	}
+}
+
+int *poisk_binarniy(int* A, int size, int key)
+{
+	int left = 0, right = size, mid;
+	while (left < right)
+	{
+		mid = (left + right) / 2;
+		if (key < A[mid]) right = mid;
+		else left = mid + 1;
+	}
+	return A+left;
+}
