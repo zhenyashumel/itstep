@@ -1,8 +1,8 @@
 #include<iostream>
 #include<ctime>
 using namespace std;
-void sortirovka_vstavkami(int*, int);
-int* poisk_binarniy(int*, int, int);
+void sort(int*, int);
+int* bin_search(int*, int, int);
 int main()
 {
 	setlocale(0, "");
@@ -15,10 +15,10 @@ int main()
 	for (int i = 0; i < size; i++)
 	{
 		*(ptr_a + i) = rand() % 50;
-		cout <<  ptr_a[i] << " ";
+		cout <<   ptr_a[i] << " ";
 	}
 	cout << endl;
-	sortirovka_vstavkami(ptr_a, size);
+	sort(ptr_a, size);
 	for (int i = 0; i < size; i++)
 	{
 		cout <<  ptr_a[i] << " ";
@@ -27,13 +27,13 @@ int main()
 	return 0;
 }
 
-void sortirovka_vstavkami(int*ptr, int size)
+void sort(int*ptr, int size)
 {
 	int *ptr_pos;
 	for (int i = 1; i < size; i++)
 	{
 		int temp = ptr[i];
-		ptr_pos = poisk_binarniy(ptr, i, temp);
+		ptr_pos = bin_search(ptr, i, temp);
 		for (int j = i; (j + ptr) != ptr_pos; j--)
 		{
 			*(ptr + j) = *(ptr + j - 1);
@@ -42,7 +42,7 @@ void sortirovka_vstavkami(int*ptr, int size)
 	}
 }
 
-int *poisk_binarniy(int* A, int size, int key)
+int *bin_search(int* A, int size, int key)
 {
 	int left = 0, right = size, mid;
 	while (left < right)
