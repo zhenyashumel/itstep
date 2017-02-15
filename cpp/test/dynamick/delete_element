@@ -1,0 +1,56 @@
+#include<iostream>
+#include<ctime>
+using namespace std;
+
+int* give_memory(int*, int);
+int* free_memory(int*);
+int*delete_element(int*, int*, int);
+int main()
+{
+	setlocale(0, "");
+	int *array = NULL, size;
+	cout << "Введите размер массива\n";
+	cin >> size;
+	array = give_memory(array, size);
+	for (int i = 0; i < size; i++)
+	{
+		array[i] = rand() % 100;
+		cout << *(array + i) << " ";
+	}
+	cout << endl;
+	int value, index;
+	cout << "Введите индекс удаляемого элемента ";
+	cin >>  index;
+	array=delete_element(array, &size,index);
+	for (int i = 0; i < size; i++)
+	{
+		cout << *(array + i) << " ";
+	}
+	array = free_memory(array);
+	return 0;
+}
+
+int* give_memory(int*A, int size)
+{
+	A = (int*)malloc(size*sizeof(int));
+	return A;
+
+}
+int* free_memory(int* A)
+{
+	free(A);
+	A = NULL;
+	return A;
+}
+
+
+int*delete_element(int*A, int*size, int index)
+
+{ 
+for(int i=index+1;i<*size;i++)
+{
+A[i-1]=A[i];
+}
+(*size)--;
+return A;
+}
