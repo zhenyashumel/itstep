@@ -1,0 +1,10 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	const int size = 100;
+	int *A;
+	A = (int*)malloc(size*sizeof(int));
+	free(A);
+	return 0;
+}
