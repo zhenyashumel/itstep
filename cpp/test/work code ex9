@@ -1,0 +1,55 @@
+#include<iostream>
+#include<ctime>
+using namespace std;
+void sortirovka_vstavkami(int*, int);
+int* poisk_binarniy(int*, int, int);
+int main()
+{
+	setlocale(0, "");
+	srand((unsigned)time(0));
+	const int size_0 = 100;
+	int a[size_0], size;
+	cout << "Введите количество элементов массива: ";
+	cin >> size;
+	int*ptr_a = a;
+	for (int i = 0; i < size; i++)
+	{
+		*(ptr_a + i) = rand() % 50;
+		cout <<  ptr_a[i] << " ";
+	}
+	cout << endl;
+	sortirovka_vstavkami(ptr_a, size);
+	for (int i = 0; i < size; i++)
+	{
+		cout <<  ptr_a[i] << " ";
+	}
+	cout << endl;
+	return 0;
+}
+
+void sortirovka_vstavkami(int*ptr, int size)
+{
+	int *ptr_pos;
+	for (int i = 1; i < size; i++)
+	{
+		int temp = ptr[i];
+		ptr_pos = poisk_binarniy(ptr, i, temp);
+		for (int j = i; (j + ptr) != ptr_pos; j--)
+		{
+			*(ptr + j) = *(ptr + j - 1);
+		}
+		*ptr_pos = temp;
+	}
+}
+
+int *poisk_binarniy(int* A, int size, int key)
+{
+	int left = 0, right = size, mid;
+	while (left < right)
+	{
+		mid = (left + right) / 2;
+		if (key < A[mid]) right = mid;
+		else left = mid + 1;
+	}
+	return A + left;
+}
