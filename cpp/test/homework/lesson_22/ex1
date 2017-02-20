@@ -1,0 +1,95 @@
+#include <iostream>
+#include <stdlib.h>
+#include <ctime>
+using namespace std;
+
+int **giveMemoryCalloc(int **a, int rows, int colls);
+int **freeMemory(int **a, int rows);
+void init(int **a, int rows, int colls);
+void print(int **a, int rows, int colls);
+int **arrayMult(int **a1, int rows1, int colls1, int **a2, int rows2, int colls2);
+
+
+int main()
+{
+	int **array1 = NULL;
+	int **array2 = NULL;
+
+	int rows1; cout << "Input rows: "; cin >> rows1;
+	int colls1; cout << "Input colls "; cin >> colls1;
+
+	int rows2; cout << "Input rows: "; cin >> rows2;
+	int colls2; cout << "Input colls "; cin >> colls2;
+
+	array1 = giveMemoryCalloc(array1, rows1, colls1);
+	array2 = giveMemoryCalloc(array2, rows2, colls2);
+
+	init(array1, rows1, colls1);
+	init(array2, rows2, colls2);
+
+	print(array1, rows1, colls1);
+	cout << "-----------------------------------\n";
+	print(array2, rows2, colls2);
+
+	cout << endl << endl;
+	int **array3 = arrayMult(array1, rows1, colls1, array2, rows2, colls2);
+	print(array3, rows1, colls2);
+
+	
+	freeMemory(array1, rows1);
+	freeMemory(array2, rows2);
+	freeMemory(array3, rows1);
+
+	system("pause");
+	return 0;
+}
+int **arrayMult(int **a1, int rows1, int colls1, int **a2, int rows2, int colls2)
+{
+	int **array = NULL;
+	array = giveMemoryCalloc(array, rows1, colls2);
+
+	if (rows2 != colls1) cout << "This arrays can't be multiplied\n";
+	else{
+
+		for (int i = 0; i < rows1; i++)			
+				for (int k = 0; k < colls1; k++)
+					for (int j = 0; j < colls2; j++)
+					array[i][j] += a1[i][k] * a2[k][j];
+	}
+	return array;
+}
+
+void print(int **a, int rows, int colls)
+{
+	for (int i = 0; i < rows; i++){
+		for (int j = 0; j < colls; j++)
+			cout << a[i][j] << "\t";
+		cout << endl;
+	}
+}
+
+void init(int **a, int rows, int colls)
+{
+	for (int i = 0; i < rows; i++)
+		for (int j = 0; j < colls; j++)
+			a[i][j] = rand() % 25 - 10;
+}
+
+int **freeMemory(int **a, int rows)
+{
+	for (int i = 0; i < rows; i++)
+		free(a[i]);
+	free(a);
+
+	return a = NULL;
+}
+
+int **giveMemoryCalloc(int **a, int rows, int colls)
+{
+	a = (int**)calloc(rows,sizeof(int*));
+
+	for (int i = 0; i < rows; i++)
+		a[i] = (int*)calloc(colls,sizeof(int));
+
+	return a;
+}
