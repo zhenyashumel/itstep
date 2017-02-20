@@ -1,0 +1,97 @@
+#include <iostream>
+#include <ctime>
+using namespace std;
+int *giveMemory(int*, int);
+int *freeMemory(int *);
+int *giveCalloc(int *a, int size);
+void sum(int*, int*, int, int);
+void mult(int*a1, int*a2, int s1, int s2);
+void init(int*a, int size);
+void print(int*a, int size);
+
+int main()
+{
+	setlocale(0, "");
+	srand(unsigned(time(0)));
+	int *array1 = NULL, *array2 = NULL;
+	int size1; cout << "Введите количество элементов в первом массиве: "; cin >> size1;
+	int size2; cout << "Введите количество элементов во втором массиве: "; cin >> size2;
+	array1 = giveCalloc(array1, size1);
+	array2 = giveCalloc(array2, size2);
+	cout << "A: "; init(array1, size1);
+	cout << "B: "; init(array2, size2);
+
+	sum(array1, array2, size1, size2);
+	cout << endl;
+	mult(array1, array2, size1, size2);
+
+
+	cout << endl;
+	
+	return 0;
+}
+void mult(int*a1, int*a2, int s1, int s2)
+{
+	int size = s1 + s2 - 1;
+
+	int *arrayM = NULL;
+	arrayM = giveCalloc(arrayM, size);
+
+	for (int i = 0; i < s1; i++)
+	for (int j = 0; j < s2; j++)
+		arrayM[j + i] += a1[i] * a2[j];
+
+	print(arrayM, size);
+}
+void sum(int*a1, int*a2, int s1, int s2)
+{
+	int s3, s4;
+	if (s1 > s2) s3 = s2;
+	else s3 = s1;
+
+	int *array3 = NULL;
+	array3 = giveCalloc(array3, s3);
+
+	for (int i = 0; i < s3; i++)
+		*(array3 + i) = *(a1 + i) + *(a2 + i);
+
+	if (s1 > s2) s4 = s1;
+	else s4 = s2;
+
+	for (s3; s3 < s4 + 1; s3++)
+	{
+		if (s4 == s1) *(array3 + s3) = *(a1 + s3);
+		else *(array3 + s3) = *(a2 + s3);
+	}
+
+	print(array3, s4);
+}
+int *freeMemory(int *a)
+{
+	free(a);
+	return a = NULL;
+}
+int *giveMemory(int *a, int size)
+{
+	a = (int*)malloc(size*sizeof(int));
+	return a;
+}
+int *giveCalloc(int *a, int size)
+{
+	a = (int*)calloc(size, sizeof(int));
+	return a;
+}
+void init(int*a, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		int b; cout << "Введите элемент: "; cin >> b;
+		a[i] = b;
+	}
+}
+void print(int*a, int size)
+{
+	for (int i = 0; i < size; i++)
+		cout << *(a + i) << "  ";
+}
+
