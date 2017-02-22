@@ -1,0 +1,50 @@
+#include<iostream>
+using namespace std;
+double summa(double el, double el2)
+{
+	return el + el2;
+}
+double  difference(double el, double el2)
+{
+	return el - el2;
+}
+double multiply(double el, double el2)
+{
+	return el *el2;
+}
+double devision(double el, double el2)
+{
+	return el / el2;
+}
+void print(double a,double b , double(*alg)(double,double))
+{
+	cout << (*alg)(a, b);
+}
+double(*getfunptr())(double,double)
+{
+	double(*ptr)(double, double) = NULL;
+	int choice;
+	cout << "\n1.+\n2.-\n3.*\n4. /\n";
+	cin >> choice;
+	switch (choice)
+	{
+		case 1: ptr = &summa; break;
+		case 2: ptr = &difference; break;
+		case 3:ptr = &multiply; break;
+		case 4:ptr = &devision;
+	}
+
+
+	return ptr;
+}
+int main()
+{
+	
+	setlocale(0, "");
+	double  a, b;
+	cout << "Введите 2 числа\n";
+	cin >> a >> b;
+	print(a, b, getfunptr());
+
+	return 0;
+}
