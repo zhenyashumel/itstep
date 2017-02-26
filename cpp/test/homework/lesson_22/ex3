@@ -1,0 +1,91 @@
+#include <iostream>
+#include <stdlib.h>
+#include <ctime>
+using namespace std;
+
+int **giveMemoryCalloc(int **a, int rows, int colls);
+int **freeMemory(int **a, int rows);
+void init(int **a, int rows, int colls);
+void print(int **a, int rows, int colls);
+int **arrayMult(int **a1, int rows1, int colls1, int **a2, int rows2, int colls2);
+int **insert_row(int **a, int *rows, int colls, int index);
+
+
+int main()
+{
+	setlocale(0, "");
+	int **a = nullptr, rows, colls, index;
+	cout << "Введите кол-во строк и столбцов ";
+	cin >> rows >> colls;
+	a = giveMemoryCalloc(a, rows, colls);
+	init(a, rows, colls);
+	print(a, rows, colls);
+	cout << "Введите индекс вставляемой строчки ";
+	cin >> index;
+	a = insert_row(a, &rows, colls, index);
+	print(a, rows, colls+1);
+	a = freeMemory(a, rows);
+	return 0;
+}
+
+void print(int **a, int rows, int colls)
+{
+	for (int i = 0; i < rows; i++){
+		for (int j = 0; j < colls; j++)
+			cout << a[i][j] << "\t";
+		cout << endl;
+	}
+}
+
+void init(int **a, int rows, int colls)
+{
+	for (int i = 0; i < rows; i++)
+	for (int j = 0; j < colls; j++)
+		a[i][j] = rand() % 25 - 10;
+}
+
+int **freeMemory(int **a, int rows)
+{
+	for (int i = 0; i < rows; i++)
+		free(a[i]);
+	free(a);
+
+	return a = NULL;
+}
+
+int **giveMemoryCalloc(int **a, int rows, int colls)
+{
+	a = (int**)calloc(rows, sizeof(int*));
+
+	for (int i = 0; i < rows; i++)
+		a[i] = (int*)calloc(colls, sizeof(int));
+
+	return a;
+}
+int **insert_row(int **a, int *rows, int colls, int index)
+{
+	int **temp = nullptr;
+	temp = giveMemoryCalloc(temp, *rows , colls+1);
+	for (int i = 0; i < *rows; i++)
+	{
+		for (int j = 0; j <index; j++)
+		{
+			temp[i][j] = a[i][j];
+		}
+
+	}
+
+	for (int j = 0; j < *rows; j++)
+	{
+		temp[j][index] = 555;
+	}
+	for (int i = 0; i < *rows; i++)
+	{
+		for (int j = index+1; j < colls+1; j++)
+		{
+			temp[i ][j] = a[i][j-1];
+		}
+	}
+	
+	return temp;
+}
