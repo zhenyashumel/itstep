@@ -1,0 +1,42 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+int find(int *arr, int(*alg)(int), int a);
+int(*getfunptr(int(*arrptr[])(int)))(int);
+int kor(int a)
+{
+	return sqrt(a);
+}
+int kub(int a)
+{
+	return a*a*a;
+}
+int sin123(int a)
+{
+	return sin(a);
+}
+
+int (*getfunptr(int(*arrptr[])(int)))(int)
+{
+	int choice;
+	cout << "\n1. Корень числа\n2. Куб числа\n3.Синус числа\n";
+	cin >> choice;
+	return arrptr[choice-1];
+}
+
+void find(int*, int, int(*)(int));
+
+int main()
+{
+	setlocale(0, "");
+	int(*arrayptr[3])(int) = { kor, kub, sin123 };//массив указателей на ф-ии
+	int a;
+	cout << "Введите число: ";
+	cin >> a;
+	
+	cout << getfunptr(arrayptr)(a);
+
+	system("pause");
+	return 0;
+}
+
