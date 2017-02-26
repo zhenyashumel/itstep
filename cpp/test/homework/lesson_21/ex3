@@ -1,0 +1,94 @@
+#include <iostream>
+#include <ctime>
+using namespace std;
+int *giveMemory(int*, int);
+int *freeMemory(int *);
+int *giveCalloc(int *a, int size);
+void sum(int*, int*, int, int);
+void init(int*a, int size);
+int* function(int*, int*, int, int, int);
+void print(int*, int size);
+int function1(int a[], int b[], int size1, int size2);
+int main()
+{
+	setlocale(0, "");
+	int size=0;	
+	int *temp = NULL;
+	srand(unsigned(time(0)));
+	int *array1 = NULL, *array2 = NULL;
+	int size1; cout << "Введите количество элементов в первом массиве: "; cin >> size1;
+	int size2; cout << "Введите количество элементов во втором массиве: "; cin >> size2;
+	array1 = giveCalloc(array1, size1);
+	array2 = giveCalloc(array2, size2);
+	cout << "A: "; init(array1, size1);
+	cout << "B: "; init(array2, size2);
+	size = function1(array1, array2, size1, size2);
+	temp = function(array1, array2, size1, size2, size);
+	print(temp, size);
+
+	cout << endl;
+
+	return 0;
+}
+int function1(int a[], int b[], int size1, int size2) //ищем общие элементы для того , что бы задать размер массива
+{
+	int size = 0;
+	for (int i = 0; i < size1; i++)
+	{
+		for (int j = 0; j < size2; j++)
+		{
+			if (a[i] == b[j]) size++;
+		}
+	}
+	return size;
+}
+int *function(int a[], int b[], int size1, int size2, int size)
+{
+	int *temp = NULL;
+	temp = giveMemory(temp, size);
+	int x = 0;//номер элемента в новом массиве
+	for (int i = 0; i < size1; i++)
+	{
+		for (int j = 0; j < size2; j++)
+		{
+			if (a[i] == b[j])
+			{
+				temp[x] = a[i];
+				x++;
+			}
+		}
+	}
+	a = freeMemory(a);
+	b = freeMemory(b);
+	return temp;
+
+
+}
+int *freeMemory(int *a)
+{
+	free(a);
+	return a = NULL;
+}
+int *giveMemory(int *a, int size)
+{
+	a = (int*)malloc(size*sizeof(int));
+	return a;
+}
+int *giveCalloc(int *a, int size)
+{
+	a = (int*)calloc(size, sizeof(int));
+	return a;
+}
+void init(int*a, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		int b; cout << "Введите элемент: "; cin >> b;
+		a[i] = b;
+	}
+}
+void print(int*a, int size)
+{
+	for (int i = 0; i < size; i++)
+		cout << *(a + i) << "  ";
+}
