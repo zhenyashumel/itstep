@@ -35,3 +35,4 @@ for i in 1,2,3:
 
 for i in range(0,4,1):
      
+from math import ceil - подгружает функцию из библиотеки. (вместо math -библиотеку, вместо ceil - функцию)
