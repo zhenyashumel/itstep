@@ -1,0 +1,25 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+int length(char*);
+
+int main()
+{
+	char ptr[100];
+	cout << "Input str: ";
+	cin.getline(ptr, 100);
+	int counter = length(ptr);
+
+	cout << counter;
+	return 0;
+}
+int length(char*str)
+{
+	int counter =0;
+	
+	for (int i = 0; str[i]!= '\0' ; i++)
+	{
+		counter++;
+	}
+	return counter;
+}
