@@ -1,0 +1,47 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+char*findSub(char*, char*);
+
+int main()
+{
+	char ptr[100];
+	cout << "Input str: ";
+	cin.getline(ptr, 100);
+	char ptr2[10];
+	cout << "Input sub: ";
+	cin.getline(ptr2, 10);
+	char*ykazatel = findSub(ptr, ptr2);
+	int counter = 0;
+	for (; ykazatel != 0;ykazatel=findSub(ykazatel+strlen(ptr2),ptr2))
+	{
+		counter++;
+	}
+	cout << counter;
+	counter = NULL;
+	ykazatel = strstr(ptr, ptr2);
+	for (; ykazatel != 0; ykazatel = strstr(ykazatel + strlen(ptr2), ptr2))
+	{
+		counter++;
+	}
+	cout << counter;
+	return 0;
+}
+char*findSub(char*str, char*sub)
+{
+	char*startSTR = str;
+	char*startSUB = sub;
+	char *ptr = NULL;
+	for (int i = 0; str[i]!= '\0' ; i++)
+	{
+		startSTR = &str[i];
+		ptr = startSTR;
+		while (*startSUB != '\0' && *startSUB == *startSTR)
+		{
+			startSUB++;
+			startSTR++;
+		}
+		if (*startSUB == '\0') return ptr;
+	}
+	return 0;
+}
