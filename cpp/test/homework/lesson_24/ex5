@@ -1,0 +1,55 @@
+#include <cstring>
+#include <iostream>
+
+using namespace std;
+
+void function1(char*, int);
+void function2(char*, const char*);
+
+int main()
+{
+	setlocale(0,"");
+	const char* delim = " ,.:;!?";
+	char str[300];
+	cout << "Введите предлоджение: ";
+	cin.getline(str, sizeof(str));
+	function2(str, delim);
+	cout << "Получилось: ";
+	cout << str << "\n\n";
+}
+
+void function1(char* str, int n)
+{
+	char* str2 = str + n - 1;
+
+	while (str < str2)
+	{
+		char t = *str;
+		*str = *str2;
+		*str2 = t;
+
+		++str;
+		--str2;
+	}
+}
+
+void function2(char* str, const char* delim)
+{
+	while (*str)
+	{
+		if (strchr(delim, *str))
+		{
+			do ++str;
+			while (*str && strchr(delim, *str));
+		}
+
+		else
+		{
+			int n = 0;
+			do ++n;
+			while (str[n] && !strchr(delim, str[n]));
+			function1(str, n);
+			str += n;
+		}
+	}
+}
