@@ -1,0 +1,15 @@
+atoi - преобразует строку в число
+int atoi(char*);
+str=256а6cd
+cout<<atoi(str)<<endl;   ----  256
+
+char* strpbrk(char*,const char*) --- ищет один из символ
+
+char sh[]="+-*/";
+char str[100],*s,oper[20];
+int noper=0;
+while(s=strpbrk(str,ch))
+{
+oper[Noper++]=*s
+*s=' ';
+}
