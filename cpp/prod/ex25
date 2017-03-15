@@ -1,0 +1,48 @@
+                                            Структуры данных
+                                            
+struct имя нового типа { объявление; };
+
+	struct student
+	{
+		char fio[30];
+		unsigned int age;
+		unsigned int marks[5];
+		
+	};
+private:  - делает вс закрытым  
+Работа с указателями 
+student st_ptr;
+st_ptr->fio;  (тире - и знак больше >)
+
+  
+  
+                                            Стэк
+str =((()()))()
+
+struct LIFO
+{
+	char stack[size];
+	int top;
+
+};
+void push(LIFO *st,char ch)
+{
+	if (st->top == size)
+	{
+		cout << "Stack is overflowed\n";
+		return;
+	}
+	st->stack[st->top] = ch;
+	st->top++;
+}
+char pop(LIFO *st)
+{
+	if (st->top == 0)
+	{
+		cout << "Stack is empty\n";
+		return 0;
+	}
+	st->top--;
+	return st->stack[st->top];
+}
+ 
