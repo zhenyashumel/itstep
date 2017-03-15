@@ -1,0 +1,44 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+
+int main()
+{
+	setlocale(0, "");
+	char str[100], words[30][30], *s;
+	cout << "Введите строчку: ";
+	cin.getline(str, 100);
+	char delim[10] = " .,!?";
+	s = str;
+	s = strtok(s, delim);
+	int i = 0;
+	while (s != NULL)
+	{
+
+		strcpy(words[i], s);
+		i++;
+
+		s = strtok(0, delim);
+	}
+	int size = i;
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = size - 1; j>i; j--)
+		{
+			if (strcmp(words[j], words[j - 1]) < 0)
+			{
+				swap(words[j], words[j - 1]);
+			}
+		}
+	}
+	cout << "Отсортированный массив: ";
+	for (int i = 0; i < size; i++)
+	{
+		
+		cout << words[i] << "\t";
+
+
+	}
+	cout << endl;
+	return 0;
+}
