@@ -1,0 +1,81 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<cstring>
+using namespace std;
+const int size = 20;
+char max(char a, char b)
+{
+	if (a > b) return a;
+	else return b;
+
+}
+char min(char a, char b)
+{
+	if (a < b) return a;
+	else return b;
+}
+struct LIFO
+{
+	char stack[size];
+	int top;
+
+};
+void push(LIFO *st,char ch)
+{
+	if (st->top == size)
+	{
+		cout << "Stack is overflowed\n";
+		return;
+	}
+	st->stack[st->top] = ch;
+	st->top++;
+}
+char pop(LIFO *st)
+{
+	if (st->top == 0)
+	{
+		cout << "Stack is empty\n";
+		return 0;
+	}
+	st->top--;
+	return st->stack[st->top];
+}
+char check(char *str)
+{
+	
+	LIFO st;
+	st.top = 0;
+	int i = 0;
+	while (str[i]!='\0')
+	{
+		
+		if (str[i] == 'a') push(&st, str[i]);
+		else if (str[i] == 'i') push(&st, str[i]);
+		else if (isdigit(str[i])) push(&st, str[i]);
+		else if (str[i] == ')')
+		{
+			char a = pop(&st);
+			char b = pop(&st);
+			char c = pop(&st);
+			if (c == 'i') push(&st, min(a, b));
+			if (c == 'a') push(&st, max(a, b));
+
+		}
+		i++;
+		
+	}
+	return pop(&st);
+
+	
+}
+
+int main()
+{
+	
+	
+	char str[100], *s, oper[19];
+	cin >> str;
+	cout << "Answer: " << check(str);
+	
+	return 0;
+}
