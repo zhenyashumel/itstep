@@ -1,0 +1,37 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+int main()
+{
+	setlocale(0, "");
+
+	char text[1000];
+	char sBuf[1000];
+	char str1[32];
+	long sLen;
+	long sPos;
+
+	cout << "Введите предложение : ";
+	cin.getline(text, 1000);
+	cout << "Что будем удалять ? ";
+	cin.getline(str1, 32);
+	
+	
+
+	char* s = strstr(text, str1);
+	while (s)
+	{
+		sLen = strlen(text);
+		sPos = sLen - strlen(s);
+		strcpy(sBuf, s + strlen(str1));
+		text[sPos] = '\0';
+		strcat(text, sBuf);
+		s = strstr(text, str1);
+	}
+	cout << "Получилось:";
+	cout << text << "\n\n";
+	return 0;
+}
