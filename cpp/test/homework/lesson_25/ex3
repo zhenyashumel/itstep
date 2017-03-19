@@ -1,0 +1,24 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+
+int main()
+{
+	setlocale(0, "");
+	char str[20];
+	cout << "Введите строку: ";
+	cin.getline(str, 20);
+	int summ = 0;
+	for (int i = 0; str[i] != '\0'; i++)
+	{
+		if (str[i] != ' ')
+			summ += atoi(&str[i]);
+	}
+	cout << "Сумма всех чисел равна: "<<summ;
+
+
+
+
+	
+	return 0;
+}
