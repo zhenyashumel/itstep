@@ -1,0 +1,57 @@
+#include<iostream>
+using namespace std;
+
+struct student
+{
+   char fio[20];
+   int gr;
+   int n_z;
+   int marks[3];
+};
+student read_st()
+{
+   student st;
+   cout << "Введите фио\n";
+   cin >> st.fio;
+   cout << "Введите группу\n";
+   cin >> st.gr;
+   cout << "Введите номер зачетки\n";
+   cin >> st.n_z;
+   cout << "Введите 3   оценки\n";
+   for (size_t i = 0; i < 3; i++)
+   {
+      cin >> st.marks[i];
+    }
+return st;
+}
+void write_st(student st)
+{   
+   cout << st.fio<<" ";
+   cout << st.gr<<" ";
+   cout << st.n_z << " ";
+    for (size_t i = 0; i < 3; i++)
+   {
+      cout<< st.marks[i]<<" ";
+   }
+cout<<endl;
+}
+
+
+int main()
+{
+   setlocale(0, "");
+   student st_arr[2];
+   for (size_t i = 0; i < 2; i++)
+   {
+      st_arr[i] = read_st();
+   }
+   cout << "список студентов\n";
+   for (size_t i = 0; i < 2; i++)
+   {
+     write_st( st_arr[i]);
+   }
+   system("pause");
+   return 0;
+}
+
+
