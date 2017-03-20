@@ -1,57 +1,119 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
+#include<cstring>
 using namespace std;
 
-struct student
+const int size = 3;
+struct Student
 {
-   char fio[20];
-   int gr;
-   int n_z;
-   int marks[3];
+	char FIO[40];
+	short group;
+	unsigned long num_zuch;
+	int marks[3];
 };
-student read_st()
+
+Student read()
 {
-   student st;
-   cout << "Введите фио\n";
-   cin >> st.fio;
-   cout << "Введите группу\n";
-   cin >> st.gr;
-   cout << "Введите номер зачетки\n";
-   cin >> st.n_z;
-   cout << "Введите 3   оценки\n";
-   for (size_t i = 0; i < 3; i++)
-   {
-      cin >> st.marks[i];
-    }
-return st;
-}
-void write_st(student st)
-{   
-   cout << st.fio<<" ";
-   cout << st.gr<<" ";
-   cout << st.n_z << " ";
-    for (size_t i = 0; i < 3; i++)
-   {
-      cout<< st.marks[i]<<" ";
-   }
-cout<<endl;
+	Student student;
+
+	cout << "Input FIO: ";
+	cin.getline(student.FIO,40);
+
+	cout << "Input group: ";
+	cin >> student.group;
+
+	cout << "Input num_zach: ";
+	cin >> student.num_zuch;
+
+	cout << "Input  3 marks: ";
+	for (int i = 0; i < 3; i++)
+		cin >> student.marks[i];
+
+	cin.get();
+	return student;
 }
 
+void output(Student student)
+{
+	cout << "Student: " << student.FIO << " ";
+	cout << student.group << " ";
+	cout << student.num_zuch << " ";
+	for (int i = 0; i < 3; i++)
+		cout  << student.marks[i] << " ";
+}
+
+float avg(Student student)
+{
+	float sred = 0;
+	for (int i = 0; i < 3; i++)
+		sred += student.marks[i];
+
+	return sred / 3;
+}
+
+float whole_avg(Student *student, int size)
+{
+	float w_sred = 0;
+	for (int i = 0; i < size; i++)
+		w_sred += avg(student[i]);
+
+	return w_sred / size;
+}
+
+ bool otlichniki(Student student)
+{
+	 bool flag = 1;
+	 for (int i = 0; i < 3; i++)
+		 if (student.marks[i] < 9) flag = 0;
+	 
+	 return flag;
+}
+
+ void change_marks(Student *student, char *name)
+ {
+	 if (strcmp(name, student->FIO) == 0)
+	 {
+		 for (int i = 0; i < 3; i++)
+		 {
+			 cout << "Input " << i + 1 << "mark: ";
+			 cin >> student->marks[i];
+		 }
+	 }
+ }
 
 int main()
 {
-   setlocale(0, "");
-   student st_arr[2];
-   for (size_t i = 0; i < 2; i++)
-   {
-      st_arr[i] = read_st();
-   }
-   cout << "список студентов\n";
-   for (size_t i = 0; i < 2; i++)
-   {
-     write_st( st_arr[i]);
-   }
-   system("pause");
-   return 0;
-}
+	Student student[size];
 
+	for (int i = 0; i < size; i++)
+		student[i] = read();
+	
+	for (int i = 0; i < size; i++)
+	{
+		output(student[i]);
+		cout << " " << avg(student[i]) << endl;
+	}
+		
+	cout << "Whole avg: " << whole_avg(student,size);
+
+	cout << "Good boys: ";
+	for (int i = 0; i < size; i++)
+	{
+		if (otlichniki(student[i]))
+			cout << student[i].FIO << " ";
+	}
+
+	cout << "Input student for changing marks: ";
+	char st[20]; cin >> st;
+	for (int i = 0; i < size; i++)
+		change_marks(&student[i], st);
+	
+	for (int i = 0; i < size; i++)
+		output(student[i]);
+	
+
+	cout <<endl;
+	system("pause");
+	return 0;
+}
 
