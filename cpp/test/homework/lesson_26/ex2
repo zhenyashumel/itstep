@@ -3,79 +3,80 @@
 #include<cstring>
 using namespace std;
 const int size = 20;
-char max(char a, char b)
-{
-	if (a > b) return a;
-	else return b;
-
-}
-char min(char a, char b)
-{
-	if (a < b) return a;
-	else return b;
-}
 struct LIFO
 {
-	char stack[size];
-	int top;
-
+   char stack[size];
+   int top;
 };
-void push(LIFO *st,char ch)
+void push(LIFO *st, char ch)
 {
-	if (st->top == size)
-	{
-		cout << "Stack is overflowed\n";
-		return;
-	}
-	st->stack[st->top] = ch;
-	st->top++;
+   if (st->top == size)
+   {
+      cout << "stack is full\n";
+      return;
+   }
+   st->stack[st->top] = ch;
+   st->top++;
 }
 char pop(LIFO *st)
 {
-	if (st->top == 0)
-	{
-		cout << "Stack is empty\n";
-		return 0;
-	}
-	st->top--;
-	return st->stack[st->top];
+   if (st->top == 0)
+   {
+      cout << "stack is empty\n";
+      return 0;
+   }
+   st->top--;
+   return st->stack[st->top];
 }
-char check(char *str)
+
+char maxi(char a, char b)
 {
-	
-	LIFO st;
-	st.top = 0;
-	int i = 0;
-	while (str[i]!='\0')
-	{
-		
-		if (str[i] == 'a') push(&st, str[i]);
-		else if (str[i] == 'i') push(&st, str[i]);
-		else if (isdigit(str[i])) push(&st, str[i]);
-		else if (str[i] == ')')
-		{
-			char a = pop(&st);
-			char b = pop(&st);
-			char c = pop(&st);
-			if (c == 'i') push(&st, min(a, b));
-			if (c == 'a') push(&st, max(a, b));
+   if (a>b)
+return a;
+   else
+return b;
+}
 
-		}
-		i++;
-		
-	}
-	return pop(&st);
+char mini(char a, char b)
+{
+   if (a>b)
+      return b;
+   else
+      return a;
+}
 
-	
+char solve(char*str)
+{
+   int i = 0;
+   char num1, num2, op;
+   LIFO st;
+   st.top=0;
+char ch;
+   while (str[i])
+   {
+      if (str[i] == 'a'||str[i] == 'i'||isdigit(str[i])) push(&st, str[i]);
+      else if (str[i] == ')')
+      {
+         num1 = pop(&st);
+         num2 = pop(&st);
+         op = pop(&st);
+         if (op=='a')
+            push(&st, maxi(num1,num2));
+         else
+         push(&st, mini(num1,num2));
+      }
+      i++;
+   }
+   return pop(&st);
 }
 
 int main()
 {
-	
-	
-	char str[100], *s, oper[19];
-	cin >> str;
-	cout << "Answer: " << check(str);
-	
-	return 0;
+setlocale(0,"");
+   char str[100];
+   cout << "Введите выражение\n"<<endl;
+   cin>>str;
+   cout << solve(str);
+   system("pause");
+   return 0;
 }
