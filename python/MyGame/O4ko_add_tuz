@@ -1,13 +1,19 @@
-# © 2017 ZhenyaProduction, Inc.
+# 21  © 2017 ZhenyaProduction, Inc.
 
 import random
 
-mass1=[1,5,10,25,50]
+import sys
+
+
+
 game=' '
+
 while game!='нет':
-    dep_1 = int(input("Игрок,введите свой депозит: "))
+    counter_tuz = False  # наличие тузов
+    dep_1 = int(input("Игрок,внесите свой депозит: "))
     while dep_1 > 0:
-        mass = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+        mass = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         random.shuffle(mass)
         a = mass.pop(0)  # присвоение первой карты игроку (счёт игрока)
         a += mass.pop(0)
@@ -33,18 +39,40 @@ while game!='нет':
         player = " "
         dil = " "
         while player != "нет":
+
             player = input("Продолжаем игру ? да/нет\n")
             if player == "да":
-                a += mass.pop(0)
+
+                x=mass.pop(0)
+                if x==11:
+                    sogl=int(input("Выпал туз!!! Это будет 1 или 11 ?\n1. 1\n2. 11\n"))
+                    if sogl==1:
+                        a+=1
+                    else:
+                        a+=11
+                        counter_tuz = True# присваивает true , если выбрано 11
+                else:
+                     a+=x
                 print("Теперь у вас ", a)
                 if a == 21:
-                    print("Player win!!!")
+
                     player = "нет"
+                if a > 21:
+                    if counter_tuz == True:
+                        a -= 10
+                        print("Вы перебрали , но у вас был туз(Вы выбрали 11). Отнимаем 10 очков")
+                        print("Ваш счёт: ", a)
+                        counter_tuz = False
+                    else:
+                        player = 'нет'
+
 
             else:
                 print("Ваш счёт: ", a)
-            if a > 21:
+
                 player = 'нет'
+
+
 
         while dil != "нет":
             # комп берет карту. Он будет её брать , пока его счёт меньше 17
