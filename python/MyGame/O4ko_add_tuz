@@ -1,6 +1,6 @@
 # 21  © 2017 ZhenyaProduction, Inc.
 
-import random
+import random, os
 
 import sys
 
@@ -41,8 +41,8 @@ while game!='нет':
         while player != "нет":
 
             player = input("Продолжаем игру ? да/нет\n")
+           
             if player == "да":
-
                 x=mass.pop(0)
                 if x==11:
                     sogl=int(input("Выпал туз!!! Это будет 1 или 11 ?\n1. 1\n2. 11\n"))
@@ -57,20 +57,26 @@ while game!='нет':
                 if a == 21:
 
                     player = "нет"
+
                 if a > 21:
                     if counter_tuz == True:
                         a -= 10
                         print("Вы перебрали , но у вас был туз(Вы выбрали 11). Отнимаем 10 очков")
                         print("Ваш счёт: ", a)
                         counter_tuz = False
+
                     else:
                         player = 'нет'
+
+
 
 
             else:
                 print("Ваш счёт: ", a)
 
                 player = 'нет'
+
+
 
 
 
@@ -90,13 +96,16 @@ while game!='нет':
                 #случай , когда у всех 21
         if a == 21 and b == 21:
             print("У вас по 21. Ничья")
-        elif a == b:
-            print("У вас по одинаковое количество очков. Ничья")
+        elif a == b and a!=21 and b!=21:
+             print("У вас по одинаковое количество очков. Ничья")
+             dep_1 -= stav_1
+
         #случай , когда у кого-то(возможно у всех) больше 21
         elif a > 21 or b > 21:
             if a > 21:
                 if b > 21:
                     print("У вас и у диллера больше 21. Вы оба проиграли")
+                    dep_1 -= stav_1
                 if b <= 21:
                     print("У вас больше 21 , а у диллера нет. Вы проиграли")
                     dep_1-=stav_1
@@ -118,6 +127,5 @@ while game!='нет':
     print("Игра окночена")
     game=input("Играем ещё раз ? да/нет\n")
 print("У вас закончились деньги. GG,WP")
-
 
 input("Press Enter to continue")
