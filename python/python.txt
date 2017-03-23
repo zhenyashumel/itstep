@@ -47,3 +47,17 @@ mass =[1,2,3,4,5,6,7,8,9,10,11] - создает массив
 random.shuffle(mass) -перемешивает массив
 a=mass.pop(0) - удаляет значение 0 из массива и присваивает в а
 
+
+
+
+
+
+                                             ООП
+     def __init__(self):
+        print("New object has been born!")    ------ делает какое-либо действие при инициализации объекта
+   
+   
+ def __str__(self):
+        rep="Critter object\n"
+        rep+="name: "+self.name+"\n"
+        return rep                             ----представляет класс в виде строкового значения
