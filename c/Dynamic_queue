@@ -1,0 +1,47 @@
+#include<iostream>
+
+using namespace std;
+struct Node //объявление узла
+{
+	int data;//данные в узле
+	Node*next; //указатель на следующий узел
+};
+struct FIFO //объявление очереди
+{
+	Node*head, *tail; 
+	};
+
+void init(FIFO*q) //инициализация очереди
+{
+	q->head = NULL;
+	q->tail = NULL;
+}
+FIFO push_back(FIFO que, int value)
+{
+	Node* cur = (Node*)malloc(sizeof(Node));//создает узел
+	cur->data = value; //сохраняем данные в новый узел
+	cur->next = NULL; //задаем указатель
+	if (que.tail) //если есть элементы в очереди
+
+		que.tail->next = cur;//преместили указатель хвоста с NULL на  новый элемент cur
+
+	que.tail = cur;//изменили хвост очереди на добавленный элемент
+	if (que.head == NULL) //если в очереди ничего не было
+		que.head = que.tail;//то изменям и голову очереди
+	return que;
+}
+int pop_front(FIFO *que)
+{
+	int temp;
+	Node *cur = que->head; //создаем копию головы очереди
+	if (que->head== NULL)//если очередь пуста выходим из функции
+	{
+		return 0;
+	}
+	temp = que->head->data;//копируем данные из головы в переменную temp
+
+	que->head = cur->next;//перемещение головы на следущий элемент
+	
+	free(cur);	//удаляем узел
+	return temp;
+}
