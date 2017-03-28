@@ -53,6 +53,8 @@ a=mass.pop(0) - удаляет значение 0 из массива и при�
 
 
                                              ООП
+class Critter(object):
+                                           
      def __init__(self):
         print("New object has been born!")    ------ делает какое-либо действие при инициализации объекта
    
@@ -60,4 +62,26 @@ a=mass.pop(0) - удаляет значение 0 из массива и при�
  def __str__(self):
         rep="Critter object\n"
         rep+="name: "+self.name+"\n"
+        
+        
+        class Test_class(object):
+
+    total=0
+    @staticmethod
+    def status():
+        print("The total number of critters is",crit.total)
+    def __str__(self):
+        rep="Critter object\n"
+        rep+="name: "+self.name+"\n"
+        return rep
+    def __init__(self):
+        print("New object has been born!")
+        Test_class.total+=1
+
+    def talk(self,):
+        print(crit)
+    def  __Private_method(self):
+        print("This is a private method")
+    def public_method(self):
+        print(crit.__Private_method())
         return rep                             ----представляет класс в виде строкового значения
