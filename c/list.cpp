@@ -57,7 +57,26 @@ void remove(Node **head, int value)
 	else cout << "List is empty" << endl;
 	
 }
+void insert_back(Node *head, int value)
+{
+	Node* cur = (Node*)malloc(sizeof(Node));
+	cur->data = value;
+	cur->next = NULL;
+	Node *element = head;
+	Node *prev = NULL;
+	if (head = NULL)
+	{
+		head = cur;
+		return ;
+	}
+	while (element)
+	{
+		prev = element;
+		element = element->next;
+	}
+	prev->next = cur;
 
+}
 int main()
 {
 	setlocale(0, "");
