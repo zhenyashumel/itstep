@@ -154,7 +154,7 @@ while choice:
         print("\n")
    
    
-    elif choice==0    #выход из программы
+    elif choice==0:    #выход из программы
         print("Goodbye")
    
    
