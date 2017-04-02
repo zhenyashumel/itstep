@@ -120,60 +120,47 @@ while choice:
           +"5.On/off lights\n"
           +"6.Open/close the doors\n"
           +"0.Quit the program\n\n")
+    
     choice=int(input("Your choice: "))
-    if choice==1:
+    
+    
+    if choice==1: #зажигание
         car.ignition()
         print("\n")
-    elif choice==2:
+    
+    
+    elif choice==2:    #езда
         car.driving()
         print("\n")
-    elif choice == 3:
+   
+   
+    elif choice == 3:  #тормоз
         car.drag()
         print("\n")
-    elif choice == 4:
+    
+    
+    elif choice == 4:     #остановка двигателя
         car.Engine_stop()
         print("\n")
-    elif choice==5:
+    
+    
+    elif choice==5:     #фары
         car.headlight()
         print("\n")
-    elif choice==6:
+    
+    
+    elif choice==6: #двери 
         car.door()
         print("\n")
-    elif choice==0:
+   
+   
+    elif choice==0    #выход из программы
         print("Goodbye")
+   
+   
     else:
-        print("Enter the correct menu item")
+        print("Enter the correct menu item") 
+        
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+input("Press Enter to continue")
