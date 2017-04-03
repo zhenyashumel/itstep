@@ -5,7 +5,7 @@ struct Node
 	int data;
 	Node*next;
 };
-Node *insert(Node *head, int value,int pos)
+Node *insert(Node *head, int value, int pos)
 {
 	Node* cur = (Node*)malloc(sizeof(Node));
 	cur->data = value;
@@ -26,13 +26,13 @@ Node *insert(Node *head, int value,int pos)
 		element->next = cur;//присвоение предыдущему элементу указателя на новый элемент
 	}
 	else cout << " Error!!!";
-	return head;	
+	return head;
 }
 void print(Node *head)
 {
 	while (head)
 	{
-		cout << head->data<<" ";
+		cout << head->data << " ";
 		head = head->next;
 	}
 }
@@ -55,7 +55,19 @@ void remove(Node **head, int value)
 	}
 	if (*head) cout << "Element not found" << endl;
 	else cout << "List is empty" << endl;
-	
+
+}
+void delete_back(Node **head)
+{
+	Node *cur = *head, *prev = NULL;
+	while (cur->next )
+	{
+		prev = cur;//сохраняем текущий элемент
+		cur = cur->next;//переход к следующему элементу
+	}
+	prev->next = NULL;
+	free(cur);
+
 }
 void insert_back(Node *head, int value)
 {
@@ -67,7 +79,7 @@ void insert_back(Node *head, int value)
 	if (head = NULL)
 	{
 		head = cur;
-		return ;
+		return;
 	}
 	while (element)
 	{
@@ -99,7 +111,12 @@ int main()
 	cout << endl;
 	remove(&list, 11);
 	print(list);
+	insert_back(list,11);
+	print(list);
+	delete_back(&list);
 	cout << endl;
+	print(list);
+	
+	
 	return 0;
 }
-
