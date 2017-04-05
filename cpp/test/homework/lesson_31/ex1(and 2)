@@ -1,0 +1,42 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+	setlocale(0, "");
+	cout << "Введите два числа: ";
+	int a, b;
+	cin >> a >> b;
+	char x;
+	cout << "Введите операцию: ";
+	cin >> x;
+	int ch;
+	switch (x)
+	{
+	case '+': ch = a + b; break;
+	case '-': ch = a - b; break;
+	case'*': ch = a*b; break;
+	case'/':ch = a / b; break;
+	}
+
+
+	cout << ch << " В двоичной системе: ";
+	for (int i = 31; i >= 0; --i)
+	{
+		cout << ((ch >> i) & 1);//побитовый сдвиг на еденицу и битовое & с еденицей для получения каждлго отдельного бита
+		if (i % 8 == 0) cout << " ";
+	}
+
+	int choise;
+	cout << "Какой байт вы хотите вывести: ";
+	cin >> choise;
+	int result = ((255 << (3 - choise) * 8)&ch) >> ((3 - choise) * 8); //здесь может быть ваша реклама
+	for (int i = 7; i >= 0; --i)
+	{
+		cout << ((result >> i) & 1);
+	}
+
+
+
+	return 0;
+
+}
