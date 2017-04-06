@@ -1,0 +1,105 @@
+# Auto. Finaly programm, class, ogjects 2017 ©ZhenyaProduction,Inc.
+
+
+
+class Auto(object):
+    #Атрибуты: масса,цвет, класс авто, макксимальная скорость
+    def __init__(self, Mass, Color, Class_auto, Max_speed):
+        self.mass = Mass
+        self.color = Color
+        self.class_auto = Class_auto
+        self.max_speed = Max_speed
+
+
+    #возможность манипуляции машиной(основные функции)
+    active = False  # зажигание
+    move = False  # движение
+    brake = False  # тормоз
+    engine = False  # остановка двигателя
+    light = False  # фары
+    doors = False  # двери
+
+
+
+    # зажигание
+    def ignition(self):
+        if not self.active:
+            if self.brake:
+                print("Now the car is started")
+                self.active = True
+            else:
+                print("To start the car, you need to press the brake")
+        else:
+            print("The car is "
+                  "already running")
+
+    # Езда
+    def driving(self):
+        if not self.active:
+            print("The car does not start")
+        elif self.brake:
+            print("You can not drive with the brake applied")
+        elif not self.move:
+            if self.doors:
+                print("You can not go with the doors open")
+            else:
+                print("Start the movement")
+                self.move = True
+        else:
+            print("The car is on its way")
+
+    # тормоз
+    def drag(self):
+
+        if not self.brake:
+            print("Brake on")
+            self.brake = True
+            self.move = False
+        else:
+            print("Brake off")
+            self.brake = False
+
+    # Остановка двигателя
+    def Engine_stop(self):
+        if not self.active:
+            print("The car does not start")
+        elif self.move:
+            print("You can not stop the engine while driving")
+        elif self.engine:
+            print("Engine stopped")
+            self.brake = True
+            self.active = False
+        else:
+            print("The engine is already off")
+
+    # фары
+    def headlight(self):
+        if not self.active:
+            print("The car does not start")
+
+        elif not self.light:
+            print("Headlights on")
+            self.light = True
+        else:
+            print("Headlights off")
+
+    # двери
+    def door(self):
+        if not self.doors:
+            print("The door is open")
+            self.doors = True
+        elif self.move:
+            print("You can not open the doors while driving")
+        else:
+            print("The door is close")
+            self.doors = False
+
+
+
+
+
+
+
+
+
+
