@@ -1,0 +1,65 @@
+# Auto. Finaly programm, class, ogjects 2017 ©ZhenyaProduction,Inc.
+
+
+from Base_class_Auto import Auto
+
+
+class Pass(Auto):  # пассажирский транспорт
+    def __init__(self, Quantity_passengers, Quantity_seats, Class_transport):
+        self.quantity_passengers = Quantity_passengers
+        self.quantity_seats = Quantity_seats
+        self.class_transport = Class_transport
+        Auto.__init__(11, "green", "passenger's", 120)
+
+
+    def info(self):
+        print("Class_auto:",self.class_transport,"\n"
+              +"Mass:",self.mass,"tons\n"
+              +"Max_speed:",self.max_speed,"km/h\n"
+              +"Color: ", self.color, "\n"
+              +" Quantity_seats:",self.quantity_seats,"\n"
+              +"Quantity_passengers:",self.quantity_passengers,"\n")
+
+
+    def say(self,text):#функция "сказать чёнить людям в салоне"
+        print("Dear passengers,",text)
+
+
+
+
+class Motor_car(Auto):       #легковой автомобиль
+    Auto.__init__(3, "black", "Motor_car", 220)
+
+
+
+
+
+
+class Ambulance(Auto):#спец техника(скорая помощь)
+    flasher = False
+    def __init__(self,Type,Number_of_medical_staff,Number_of_patients):
+        self.type=Type
+        self.number_of_medical_staff=Number_of_medical_staff
+        self.number_of_patients=Number_of_patients
+        Auto.__init__(1750, "white", "Special equipment", 150)
+
+
+    def Flashers(self):
+        if not self.active:
+            print("The car does not start")
+        elif not self.flasher:
+            print("Flasher is on ")
+            self.flasher=True
+        else:
+            print("flasher is off")
+            self.flesher=False
+
+
+
+
+
+
+
+
+
+
