@@ -59,7 +59,7 @@ class Critter(object):
         print("New object has been born!")    ------ делает какое-либо действие при инициализации объекта
    
    
- def __str__(self):
+ def __str__(self):                               ----представляет класс в виде строкового значения
         rep="Critter object\n"
         rep+="name: "+self.name+"\n"
         
@@ -84,4 +84,9 @@ class Critter(object):
         print("This is a private method")
     def public_method(self):
         print(crit.__Private_method())
-        return rep                             ----представляет класс в виде строкового значения
+        return rep                             
+        
+        
+        
+        
+     def __cal__()   -----функция , которая делает какие-либо действия  , если вызвать объект
