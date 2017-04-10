@@ -1,0 +1,33 @@
+int func(int col,int first,...)
+{
+  int sum=0;
+  int *ptr=&first;
+  while(col--)
+  {
+    sum+=*ptr;
+    ptr++
+  }
+  retrun sum;
+}
+
+#include<stdarg.h>
+
+
+va_list params
+va_start (params,адрес)
+va_arg(params,тип)
+va_end(params)  
+
+printf("Hello world");
+%[флаги][ширина][точность][длина]спецификаторы
+
+спецификатор: d или i   ---- если целое
+u -целое без знака
+o -без знака в 8 с/с
+x без знака в 16 с/с
+X -без знака в 16 с/c
+f -с плавающей точкой
+
+char str[10];
+scanf("%9s",str);
+printf("%s",str);
