@@ -13,3 +13,4 @@ int feof (FILE* stream) - 0, если не конец.
 
 fgets(str, 255, in); -считывает строку
 fputs(str, out); - записывает в файл
+fseek(in,0,SEEK_SET) смещение на начало файла
