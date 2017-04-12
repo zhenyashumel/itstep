@@ -1,0 +1,50 @@
+#include<iostream>
+using namespace std;
+const int size = 20;
+
+// структура
+struct FIFO{
+	int queue[size];
+	int head, tail;
+};
+
+// добавляем в хвост очереди
+void AddTail(FIFO*tail, int data){
+	if (tail->tail + 1 == tail->head || tail->tail + 1 == size&&tail->head == 0) return;
+	tail->tail++;
+	if (tail->tail == size) tail->tail = 0;	//организаяция кругового цикла 
+	tail->queue[tail->tail] = data;
+}
+
+// удаляем из головы очереди
+int del_head(FIFO *head){
+	if (head->head == head->tail) return 0;
+	head->head++;
+	if (head->head == size) head->head = 0;	//организаяция кругового цикла
+	return head->queue[head->head];
+}
+
+// инициализация очереди
+void init(FIFO *queue){
+	queue->head = 0;
+	queue->tail = 0;
+}
+
+int main(){
+	setlocale(0, "");
+
+	FIFO q1, q2, q3;
+
+	// инициализация очередей
+	init(&q1);
+	init(&q2);
+	init(&q3);
+
+	int size1, size2, size3;
+	cout << "Введите размеры очередей не больше 20: ";
+
+
+
+	system("pause");
+	return 0;
+}
