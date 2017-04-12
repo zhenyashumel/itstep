@@ -1,0 +1,15 @@
+#include<stdio.h>
+int main
+{
+  FILE* in;
+  in = fopen("input.txt", "r");
+}
+
+FILE* fopen(const char* filename,const char*mode); -открытие файла и как мы будем его имспользовать
+int fscanf(FILE* stream,const char *format,...)  чтение файла
+fclose(in); -закрыть файл
+fprintf(out,"sum=%d\n", sum); -запись в файл (режим "w")
+int feof (FILE* stream) - 0, если не конец.
+
+fgets(str, 255, in); -считывает строку
+fputs(str, out); - записывает в файл
