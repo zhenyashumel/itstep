@@ -11,7 +11,7 @@ int main()
 		printf("Error\n");
 		return 1;
 	}
-	if (!(in = fopen("U:\\Гусейнова_А_С\\код на занятиях\\28.txt", "r"))) //проверка на создание файла
+	if (!(in = fopen("28.txt", "r"))) //проверка на создание файла
 	{
 		printf("Error\n");
 		return 1;
