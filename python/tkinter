@@ -38,6 +38,7 @@ lis = Listbox(root, selectmode=EXTENDED, height=5,bd=)
 #рамки
 
 Frame(root,ширина,высота,цвет фона)
+
 #Рамка в рамке
 fra2 = Frame(root,
              width = 300,
@@ -51,6 +52,8 @@ fra4 = Frame(fra2,
              bg = 'gray',
              bd = 25)
 fra4.pack()
+
+f_4.pack(side=LEFT) -параметр размещения, fill=y -растянуть по оси y
 
 #Строка в рамке
 ent1 = Entry(fra4, width = 20)
@@ -79,6 +82,12 @@ win.minsize(width=400,
 win.grid()
 win.mainloop()
 root.mainloop()
+
+l_num.grid(row=1,column=0) - менеджер размещения. (как таблица(row-строка,column - столбик)
+columnspan=2 (объединение по столбикам)
+rowspan=2 (объединения по строкам)
+padx=50, pady=50 (выравнивание по x и y)
+root.destroy() -выход
 
 
 
