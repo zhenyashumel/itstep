@@ -1,0 +1,44 @@
+#include<iostream> 
+#include<cstring>
+using namespace std;
+struct bit
+{
+	bool a0 : 1;
+	bool a1 : 1;
+	bool a2 : 1;
+	bool a3 : 1;
+	bool a4 : 1;
+	bool a5 : 1;
+	bool a6 : 1;
+	bool a7 : 1;
+
+};
+union myunion
+{
+	int x;
+	bit mas[sizeof(int)];
+};
+
+int main()
+{
+	setlocale(0, "");
+	myunion un;
+	cout << "Введите число: ";
+	cin >> un.x;
+	for (int i = 3; i >= 0; i--)
+		cout << un.mas[i].a7 << un.mas[i].a6 << un.mas[i].a5 <<un.mas[i].a4 << un.mas[i].a3 << un.mas[i].a2 << un.mas[i].a1 << un.mas[i].a0 << " ";
+	cout << endl;
+	int kol = 0;
+	for (int i = 3; i >= 0; i--)
+	{
+		if (un.mas[i].a7 == 1 || un.mas[i].a6 == 1 || un.mas[i].a5 == 1 || un.mas[i].a4 == 1 || un.mas[i].a3 == 1 || un.mas[i].a2 == 1 || un.mas[i].a1 == 1 || un.mas[i].a0 == 1)
+			cout << i + 1 << " байт нулевой\n";
+		else
+		{
+			cout << i + 1 << "байт не является нулевым\n";
+			kol++;
+		}
+	}
+	cout << "Число нулевых байтов: " << kol << endl;
+	return 0;
+}
