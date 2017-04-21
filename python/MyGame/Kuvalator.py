@@ -1,22 +1,17 @@
 from tkinter import *
 from math import *
 
-second_active=False
+
 
 class Per():
-    first=0
-    second=0
+    first=0.0
+    second=0.0
     otv=0
     second_active=False
 
 
-
-
-
+#кнопки чисел
 class Buttons_numbers(Per):
-
-
-
 
     def __init__(self,text,Row,Column,Value):
         self.but = Button(root,
@@ -31,14 +26,16 @@ class Buttons_numbers(Per):
         self.but.grid(row=Row, column=Column)
 
 
-    def press(self, event):
-        if second_active==False:
 
-            Per.first =int(int(Per.first)*10+self.value)
+    #функция нажатия на кнопку числа
+    def press(self, event):
+        if Per.second_active==False:
+
+            Per.first =float(Per.first*10+self.value)
             tex.insert(END, self.value)
 
         else:
-            Per.second = int(Per.second * 10 + self.value)
+            Per.second = float(Per.second * 10 + self.value)
             tex.insert(END, self.value)
 
 class Buttons_operations(Buttons_numbers):
@@ -75,10 +72,12 @@ class Buttons_operations(Buttons_numbers):
             tex.insert(END, self.text)
         if self.text == "%":
             tex.insert(END, self.text)
+        #нажатие равно
         if self.text == "=":
             tex.insert(END, "=")
-            Per.otv=int(int(Per.first)+int(Per.second))
-            tex.insert(END, int(Per.otv))
+            tex.insert(END,float(float(Per.first)+float(Per.second)))
+            #print(Per.second, Per.first) -на случай , если будут проблемы с вычеслениями - расскоментить
+
 
 
 #main
@@ -112,6 +111,7 @@ but9 = Buttons_numbers("9", 4, 2, 9)
 but_toch = Buttons_operations(".", 5, 0)
 but0 = Buttons_numbers("0", 5, 1, 0)
 but_delete = Buttons_operations("<--", 5, 2)
+
 
 tex.grid(row=1, column=0,columnspan=7)
 root.mainloop()
