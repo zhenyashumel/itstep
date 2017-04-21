@@ -8,10 +8,14 @@ class Per():
     second=0.0
     otv=0
     second_active=False
+    op=" "
+    last_value=0
+    tochka = 0
+    kol_tochka=0
 
 
 #кнопки чисел
-class Buttons_numbers(Per):
+class Buttons_numbers():
 
     def __init__(self,text,Row,Column,Value):
         self.but = Button(root,
@@ -33,12 +37,13 @@ class Buttons_numbers(Per):
 
             Per.first =float(Per.first*10+self.value)
             tex.insert(END, self.value)
+            Per.last_value=self.value
 
         else:
             Per.second = float(Per.second * 10 + self.value)
             tex.insert(END, self.value)
 
-class Buttons_operations(Buttons_numbers):
+class Buttons_operations():
 
     def __init__(self, Text, Row, Column):
         if Text != "=":
@@ -60,22 +65,54 @@ class Buttons_operations(Buttons_numbers):
             self.but.grid(row=6, column=0, columnspan=7)
 
     def press(self, event):
+
         if self.text == "+":
-            op = "+"
+            Per.op = "+"
             Per.second_active = True
             tex.insert(END, self.text)
+
+
         if self.text == "-":
+            Per.op = "-"
+            Per.second_active = True
             tex.insert(END, self.text)
+
+
         if self.text == "/":
+            Per.op = "/"
+            Per.second_active = True
             tex.insert(END, self.text)
+
+
         if self.text == "*":
+            Per.op = "*"
+            Per.second_active = True
             tex.insert(END, self.text)
+
+
         if self.text == "%":
+            Per.op = "%"
+            Per.second_active = True
             tex.insert(END, self.text)
+
+
+
         #нажатие равно
         if self.text == "=":
             tex.insert(END, "=")
-            tex.insert(END,float(float(Per.first)+float(Per.second)))
+            if Per.op=="+":
+                tex.insert(END,float(float(Per.first)+float(Per.second)))
+
+            if Per.op == "-":
+                tex.insert(END, float(float(Per.first) - float(Per.second)))
+
+            if Per.op == "/":
+                tex.insert(END, float(float(Per.first) / float(Per.second)))
+
+            if Per.op == "*":
+                tex.insert(END, float(float(Per.first) * float(Per.second)))
+            if Per.op == "%":
+                tex.insert(END, float(float(Per.first) %  float(Per.second)))
             #print(Per.second, Per.first) -на случай , если будут проблемы с вычеслениями - расскоментить
 
 
@@ -85,7 +122,7 @@ root=Tk()
 root.title("Calculator")
 
 
-lab=Label(root,text="Kuvalator",font="15").grid(row=0, column=0,columnspan=6)
+lab=Label(root,text="   Шизометр",font="15").grid(row=0, column=0,columnspan=6)
 tex = Entry(root,width=48)
 
 but_plus = Buttons_operations("+", 2, 5)
@@ -110,9 +147,8 @@ but8 = Buttons_numbers("8", 4, 1, 8)
 but9 = Buttons_numbers("9", 4, 2, 9)
 but_toch = Buttons_operations(".", 5, 0)
 but0 = Buttons_numbers("0", 5, 1, 0)
-but_delete = Buttons_operations("<--", 5, 2)
+but_delete = Buttons_operations("←", 5, 2)
 
 
 tex.grid(row=1, column=0,columnspan=7)
 root.mainloop()
-
