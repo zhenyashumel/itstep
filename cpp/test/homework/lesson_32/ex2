@@ -1,43 +1,94 @@
 #include<iostream>
+#include<cstring>
 using namespace std;
-struct FIFO
-{
-	int queue[size];
-	int head, tail;
-};
-void push_back(FIFO*st, int data)
-{
-	if (st->tail + 1 == st->head || st->tail + 1 == size &&st->head == 0)
-	{
-		cout << " queue is full";
-		return;
-	}
-	st->tail++;
-	if (st->tail == size) st->tail = 0;//организация кругового цикла для очереди
-	st->queue[st->tail] = data;
-}
-int pop_front(FIFO *st)
-{
-	if (st->head == st->tail)
-	{
-		cout << "queue is empty\n";
-		return 0;
-	}
-	st->head++;
-	if (st->head == size) st->head = 0;
-	return st->queue[st->head];
-}
+
 struct card
 {
-	int number;
-	bool color; //0-черный, 1-белый
+	int data;//номер
+	int color;//цвет
+	card *next;//следующий элемент
 };
+struct FIFO
+{
+	card *head; 
+	card *tail;
+};
+
+
+
+FIFO push(FIFO q, int value, int col)
+{
+	card *cur = (card *)malloc(sizeof(card));
+	cur->data = value;
+	cur->color = col;
+	cur->next = NULL;
+
+	if (q.tail)
+		q.tail->next = cur;
+
+	q.tail = cur;
+
+	if (q.head == NULL)
+		q.head = q.tail;
+
+	return q;
+}
+
+int *pop(FIFO *q)
+{
+	if (q->head == NULL)
+		return 0;
+
+	card *cur = q->head;
+
+	card *temp = q->head;
+	q->head = cur->next;
+	int arr[2];
+	arr[0] = temp->data;
+	arr[1] = temp->color;
+	free(cur);
+	return arr;
+}
+
+
 int main()
 {
 	setlocale(0, "");
-	cout << "Введите кол-во карт";
-	int quantity; cin >> quantity;
-  
-  
+	FIFO que1, que2;
+	(&que1)->head = NULL;
+	(&que1)->tail = NULL;
+	(&que2)->head = NULL;
+	(&que2)->tail = NULL;
+	int quantity;
+	cout <<"Введите количество карт в колоде: ";
+	cin >> quantity;
 
+
+	for (int i = 0; i < quantity; i++)
+		que1 = push(que1, i, 0);
+
+	int *temp1;
+	for (int i = 0; i < quantity; i++)
+	{
+		temp1 = pop(&que1);
+		temp1[1] = i % 2;
+		int a = temp1[1];
+		int b = temp1[0];
+		char *colour;
+		a == 1 ? colour = "черная" : colour = "белая";
+		cout << "Карта № " << b << " должна быть " <<colour  << endl;
+
+		que2 = push(que2, b, a);
+
+		if (quantity - 1 == i) break;
+		temp1 = pop(&que1);
+		que1 = push(que1, temp1[0], temp1[1]);
+	}
+
+
+
+
+
+	system("pause");
+	return 0;
 }
