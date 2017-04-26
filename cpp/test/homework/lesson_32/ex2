@@ -10,7 +10,7 @@ struct card
 };
 struct FIFO
 {
-	card *head; 
+	card *head;
 	card *tail;
 };
 
@@ -54,13 +54,11 @@ int *pop(FIFO *q)
 int main()
 {
 	setlocale(0, "");
-	FIFO que1, que2;
+	FIFO que1;
 	(&que1)->head = NULL;
 	(&que1)->tail = NULL;
-	(&que2)->head = NULL;
-	(&que2)->tail = NULL;
 	int quantity;
-	cout <<"Введите количество карт в колоде: ";
+	cout << "Введите количество карт в колоде: ";
 	cin >> quantity;
 
 
@@ -76,10 +74,7 @@ int main()
 		int b = temp1[0];
 		char *colour;
 		a == 1 ? colour = "черная" : colour = "белая";
-		cout << "Карта № " << b << " должна быть " <<colour  << endl;
-
-		que2 = push(que2, b, a);
-
+		cout << "Карта № " << b << " должна быть " << colour << endl;
 		if (quantity - 1 == i) break;
 		temp1 = pop(&que1);
 		que1 = push(que1, temp1[0], temp1[1]);
