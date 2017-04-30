@@ -1,0 +1,57 @@
+#define _CRT_SECURE_NO_WARNINGS 
+#include<stdio.h> 
+#include<cstring>
+#include<stdlib.h>
+int main()
+{
+	FILE *in, *out;//объявляем два потока, in для чтения и out для вывода
+	if (!(in = fopen("Text.txt", "r")))//проверка на существование файла
+	{
+		printf("Error.\n");
+		return 1;
+	}
+	int counter = 0;
+	char word[28];
+	while (!feof(in))
+	{
+		fscanf(in, "%s", word);
+		counter++;
+	}
+	printf("%d", counter);
+	if (!(out = fopen("Output.txt", "w")))
+	{
+		printf("Error.\n");
+		return 1;
+	}
+	fseek(in, 0, SEEK_SET);
+	char**lenWord = (char**)malloc(sizeof(char*)*counter);
+	for (int i = 0; i < counter; i++)
+	{
+		lenWord[i] = (char*)malloc(sizeof(char*)* 28);
+	}
+	int x = 0;
+	while (!feof(in))
+	{
+		fscanf(in, "%s", word);
+		strcpy(lenWord[x], word);
+		x++;
+	}
+	for (int i = 0; i < x; i++)
+	{
+		for (int j = x - 1; j>i; j--)
+		{
+			if (strlen(lenWord[j - 1]) > strlen(lenWord[j]))
+			{
+				char* temp = (char*)malloc(sizeof(char*)* 28);
+				strcpy(temp, lenWord[j - 1]);
+				lenWord[j - 1] = lenWord[j];
+				lenWord[j] = temp;
+			}
+		}
+	}
+	for (int i = 0; i < x; i++)
+	{
+		fprintf(out, "%s\n", lenWord[i]);
+	}
+	return 0;
+}
