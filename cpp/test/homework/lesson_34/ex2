@@ -1,0 +1,116 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<stdio.h>
+#include<cstring>
+using namespace std;
+
+void fun1(FILE *in, FILE *out)
+{
+	fseek(in, 0, SEEK_SET);
+	char str[255];
+	int counter = 0;
+
+	while (!feof(in))
+	{
+		fgets(str, 255, in);
+		counter += strlen(str);
+	}
+
+	fprintf(out, "Символов :\t%d\n", counter);
+}
+void fun2(FILE *in, FILE *out)
+{
+	fseek(in, 0, SEEK_SET);
+	char str[255];
+	int counter = -1;
+
+	while (!feof(in++))
+		counter++;
+
+	fprintf(out, "Строк:\t\t%d\n", counter);
+}
+void fun3(FILE *in, FILE *out)
+{
+	fseek(in, 0, SEEK_SET);
+	char str[255];
+	char glasn[] = "уеыаоэяию";
+	int counter = 0;
+
+	while (!feof(in))
+	{
+		fgets(str, 255, in);
+		char *ptr = strtok(str, glasn);
+
+		while (ptr != NULL)
+		{
+			counter++;
+			ptr = strtok(NULL, glasn);
+		}
+	}
+	fprintf(out, "Гласных:\t\t%d\n", counter);
+}
+void fun4(FILE *in, FILE *out)
+{
+	fseek(in, 0, SEEK_SET);
+	char str[255];
+	char sogl[] = "цкнгшщзйхфвпрлджчмтб";
+	int counter = 0;
+	while (!feof(in))
+	{
+		fgets(str, 255, in);
+		char *ptr = strtok(str, sogl);
+		while (ptr != NULL)
+		{
+			counter++;
+			ptr = strtok(NULL, sogl);
+		}
+	}
+	fprintf(out, "Согласных:\t%d\n", counter);
+}
+void qn(FILE *in, FILE *out)
+{
+	fseek(in, 0, SEEK_SET);
+	char str[255];
+	char numbers[] = "1234567890";
+	int counter = 0;
+	while (!feof(in))
+	{
+		fgets(str, 255, in);
+		char *ptr = strtok(str, numbers);
+		while (ptr != NULL)
+		{
+			ptr++;
+			if (atoi(ptr) == 1 || atoi(ptr) == 6 ||
+				atoi(ptr) == 2 || atoi(ptr) == 7 ||
+				atoi(ptr) == 3 || atoi(ptr) == 8 ||
+				atoi(ptr) == 4 || atoi(ptr) == 9 ||
+				atoi(ptr) == 5) counter++;
+		}
+	}
+	fprintf(out, "Numbers:\t%d\n", counter);
+}
+
+
+
+int main()
+{
+	setlocale(0, "");
+	FILE *in, *out;
+
+	if (!(in = fopen("34.txt", "r"))){
+		printf("Error!!!!");
+		return 1;
+	}
+
+	if (!(out = fopen("out.txt", "a"))){
+		printf("ERRRRROOOOOR!!!!");
+		return 1;
+	}
+
+	fun1(in, out);
+	fun2(in, out);
+	fun3(in, out);
+	fun4(in, out);
+	qn(in, out);
+	return 0;
+}
