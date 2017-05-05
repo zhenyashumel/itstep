@@ -1,0 +1,53 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<stdio.h>
+#include<cstring>
+using namespace std;
+
+
+struct TRAIN
+{
+	char were[30];
+	int num;
+	int exp;
+};
+
+
+int main()
+{
+	FILE *in, *out;
+
+	TRAIN trains[4];
+
+	if (!(in = fopen("34.txt", "r"))){
+		printf("Error!!!");
+		return 1;
+	}
+	if (!(out = fopen("out.txt", "a"))){
+		printf("Error!!!");
+		return 1;
+	}
+
+	int i = 0;
+	while (i != 4)
+	{
+		fscanf(in, "%s %d %d", &trains[i].were, &trains[i].num, &trains[i].exp);
+		i++;
+	}
+
+	char name[20];
+	cout << "name"; cin >> name;
+
+	for (int i = 0; i != 4; i++)
+	{
+		if (strcmp(name, trains[i].were) == 0)
+			fprintf(out, "%s %d %d\n", &trains[i].were, trains[i].num, trains[i].exp);
+	}
+	for (int i = 0; i != 4; i++)
+	{
+		if (strcmp(name, trains[i].were) == 0 && trains[i].exp == 1)
+			fprintf(out, "%s %d %d\n", &trains[i].were, trains[i].num, trains[i].exp);
+	}
+
+	return 0;
+}
