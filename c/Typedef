@@ -1,0 +1,5 @@
+typedef unsigned int UI   - переименование типа данных
+
+
+tupedef double(*math_f)(double);
+math_f new_f(math_f);
