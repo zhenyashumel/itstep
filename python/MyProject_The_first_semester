@@ -407,7 +407,7 @@ class Buttons_operations(Per):
 def about():
     win = Toplevel(root)
     win.title("About Calulator")
-    lab = Label(win, text="Это просто калькулятор.\n Ничего особенного , тупо калькулятор\n"
+    lab = Label(win, text="Это просто калькулятор.\n Программа для весёлого времяпровождения\n"
                           "  Если он работает , то вам очень повезло , ведь его писал его я  "+
                 "\n© 2017 ZhenyaProduction, Inc.",font="Arial 15 bold")
     lab.pack()
