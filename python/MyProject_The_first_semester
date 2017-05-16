@@ -30,6 +30,7 @@ class Per():
     temp=0.0#переменная для хранение числа в память
     clear_all=False #переменная , которая удаляпет всё после нажатия равно
     temp_otv=False
+    error=False
 
 
 #очищает поле и возвращает все переменные в изначальный вид
@@ -54,6 +55,7 @@ def Clear_all():
     Per.cant_op = False
     Per.have_first_tochka = False
     Per.have_second_tochka = False
+    error=False
 
 
 #кнопки чисел
@@ -73,6 +75,11 @@ class Buttons_numbers():
 
     #функция нажатия на кнопку числа
     def press(self, event):
+        if Per.error==True:
+            labx = Label(root, text="\t", font="Arial 15 bold", fg="DarkOrange", bg="Yellow").grid(row=0,
+                                                                                                         column=6,
+                                                                                                         columnspan=2)
+            Per.error = False
         if Per.clear_all==True:
             Clear_all()
             Per.clear_all = False
@@ -127,6 +134,11 @@ class Buttons_operations(Per):
 
     #функция нажатия
     def press(self, event):
+        if Per.error == True:
+            labx = Label(root, text="\t", font="Arial 15 bold", fg="DarkOrange", bg="Yellow").grid(row=0,
+                                                                                                      column=6,
+                                                                                                      columnspan=2)
+            Per.error=False
         Per.clear_index += 1
 
 
@@ -188,6 +200,7 @@ class Buttons_operations(Per):
 
         # нажатие на дробь
         if self.text == "1/x":
+            Per.clear_all = True
             if Per.cant_op == False:
                 tex.insert(END, "=")
                 tex.insert(END, 1/float(float(Per.first)))
@@ -209,6 +222,7 @@ class Buttons_operations(Per):
 
         # нажатие на корень
         if self.text == "√":
+            Per.clear_all = True
             if Per.cant_op == False:
                 tex.insert(END, "=")
                 tex.insert(END, sqrt(float(float(Per.first))))
@@ -219,6 +233,7 @@ class Buttons_operations(Per):
 
         # нажатие на синус
         if self.text == "sin":
+            Per.clear_all = True
             Per.clear_all = True
             Per.temp_otv = True
             if Per.cant_op == False:
@@ -238,6 +253,7 @@ class Buttons_operations(Per):
 
         # нажатие на косинус
         if self.text == "cos":
+            Per.clear_all = True
 
             if Per.cant_op == False:
                 Per.clear_all = True
@@ -267,6 +283,7 @@ class Buttons_operations(Per):
                     lab1 = Label(root, text="M+\t", font="Arial 15 bold", fg="DarkOrange",bg="Yellow").grid(row=0, column=6,columnspan=2)
                 else:
                     if Per.first==0.0 and Per.first_tochka==0:
+                        Per.error=True
                         lab3 = Label(root, text="error!!!", font="Arial 15 bold", fg="DarkOrange",bg="Yellow").grid(row=0, column=6,
                                                                                                         columnspan=2)
                     else:
@@ -410,7 +427,7 @@ def New():
 
 #надпись
 lab=Label(root,text="\t     Вычислятор  \t\t",font="Arial 15 bold",fg="DarkOrange",bg="Yellow").grid(row=0, column=0,columnspan=8)
-tex = Entry(root,width=60)
+tex = Entry(root,width=60,bg="Silver",fg="Navy")
 
 #кнопки операций
 but_plus = Buttons_operations("+", 2, 5)
