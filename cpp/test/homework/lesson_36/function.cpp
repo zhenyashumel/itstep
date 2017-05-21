@@ -5,7 +5,7 @@ void Init(double mass[], int size)
 {
 	for (int i = 0; i < size; i++)
 	{
-		mass[i] = rand() * 0, 001;
+		mass[i] = rand() * 1.123;
 	}
 }
 void Init(int mass[], int size)
@@ -24,12 +24,15 @@ void Init(char mass[], int size)
 }
 
 
+
+
 void Print(double mass[], int size)
 {
 	for (int i = 0; i < size; i++)
 	{
 		cout << mass[i] << " ";
 	}
+	cout << endl << endl;
 }
 void Print(int mass[], int size)
 {
@@ -37,6 +40,7 @@ void Print(int mass[], int size)
 	{
 		cout << mass[i] << " ";
 	}
+	cout << endl << endl;
 }
 void Print(char mass[], int size)
 {
@@ -44,7 +48,11 @@ void Print(char mass[], int size)
 	{
 		cout << mass[i] << " ";
 	}
+	cout << endl << endl;
 }
+
+
+
 
 
 double Min(double mass[], int size)
@@ -76,6 +84,9 @@ char Min(char mass[], int size)
 }
 
 
+
+
+
 double Max(double mass[], int size)
 {
 	double max = 0;
@@ -96,7 +107,7 @@ int Max(int mass[], int size)
 }
 char Max(char mass[], int size)
 {
-	double max = 0;
+	char max = 0;
 	for (int i = 0; i < size; i++)
 	{
 		if (mass[i] > max)max = mass[i];
@@ -105,11 +116,94 @@ char Max(char mass[], int size)
 }
 
 
-void Sort(double mass[], int size);
-void Sort(int mass[], int size);
-void Sort(char mass[], int size);
 
 
-void Red(double mass[], int size, int index);
-void Red(int mass[], int size, int index);
-void Red(char mass[], int size, int index);
+
+
+void Sort(double *A, int size)
+{
+	for (int d = size / 2; d > 0; d /= 2)
+	{
+		for (int i = d, j; i < size; i++)
+		{
+			double temp = A[i];
+			for (j = i; j >= d; j -= d)
+			{
+				if (temp < A[j - d])
+					A[j] = A[j - d];
+				else break;
+			}
+			A[j] = temp;
+		}
+	}
+}
+void Sort(int *A, int size)
+{
+	for (int d = size / 2; d > 0; d /= 2)
+	{
+		for (int i = d, j; i < size; i++)
+		{
+			int temp = A[i];
+			for (j = i; j >= d; j -= d)
+			{
+				if (temp < A[j - d])
+					A[j] = A[j - d];
+				else break;
+			}
+			A[j] = temp;
+		}
+	}
+}
+void Sort(char *A, int size)
+{
+	for (int d = size / 2; d > 0; d /= 2)
+	{
+		for (int i = d, j; i < size; i++)
+		{
+			char temp = A[i];
+			for (j = i; j >= d; j -= d)
+			{
+				if (temp < A[j - d])
+					A[j] = A[j - d];
+				else break;
+			}
+			A[j] = temp;
+		}
+	}
+}
+
+
+
+
+
+void Red(double *mass, int size, int index, int value)
+{
+	if (index >= size)
+	{
+		cout << "Incorrect index";
+		return;
+	}
+	mass[index] = value;
+
+}
+void Red(int *mass, int size, int index, int value)
+{
+	if (index >= size)
+	{
+		cout << "Incorrect index";
+		return;
+	}
+	mass[index] = value;
+
+}
+void Red(char *mass, int size, int index, int value)
+{
+	if (index >= size)
+	{
+		cout << "Incorrect index";
+		return;
+	}
+	mass[index] = value;
+
+}
+
