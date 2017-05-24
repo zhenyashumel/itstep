@@ -39,4 +39,8 @@ void f()
 std::string myString="Hello,World!";
 }
 
-                      
+статические переменные в классе:
+static int counter;
+присвоить значение можно только за пределами класса(не в main)
+int MyClass::counter=0;
+MyClass::getCounter;
