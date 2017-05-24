@@ -33,8 +33,9 @@ public:
 	std::string getCity()const;
 	std::string getSchool()const;
 	std::string getGroup()const;
-	std::string getFIO()const;
+	
 
 	void print();
+	void insert();
 
 };
