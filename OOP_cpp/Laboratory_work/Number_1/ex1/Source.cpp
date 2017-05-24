@@ -81,3 +81,38 @@ void Student::print()
 	std::cout << "School: " << School << std::endl;
 	std::cout << "Group: " << Group << std::endl;
 }
+
+void Student::insert()
+{
+	
+	std::string name, surname, patronymic, school, phone, group, city;
+
+	std::cout << "Enter your Name: ";
+	std::cin >> name;
+	setName(name);
+
+	std::cout << "Enter your Surname: ";
+	std::cin >> surname;
+	setSurname(surname);
+
+	std::cout << "Enter your Patronymic ";
+	std::cin >> patronymic;
+	setPatronymic(patronymic);
+
+	std::cout << "Enter your phone number ";
+	std::cin >> phone;
+	setPhone(phone);
+
+	std::cout << "Enter your school ";
+	std::cin >> school;
+	setSchool(school);
+
+	std::cout << "Enter your group ";
+	std::cin >> group;
+	setGroup(group);
+
+	std::cout << "Enter your city" << std::endl;
+	std::cin >> city;
+	setCity(city);
+	std::cout << std::endl;
+}
