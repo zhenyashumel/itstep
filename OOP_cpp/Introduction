@@ -44,3 +44,7 @@ static int counter;
 присвоить значение можно только за пределами класса(не в main)
 int MyClass::counter=0;
 MyClass::getCounter;
+
+Делегирующий конструктор
+MyClass(double x){cout<<"228";};
+MyClass(int x):MyClass(int x)
