@@ -26,6 +26,9 @@ void setSize(const int s)
   size=s;
 }
 
+Цикл с использование итераторов
+for (std::string::iterator it = str.begin(); it != str.end(); ++it){
+std::cout << *it;
 
 int a=2;
 int b{a*2}; метод инициализации
@@ -48,3 +51,16 @@ MyClass::getCounter;
 Делегирующий конструктор
 MyClass(double x){cout<<"228";};
 MyClass(int x):MyClass(int x)
+
+динамический массив объектов:
+Point* pointArray = new Point[10];
+тип     название         тип размер
+
+delete[]pointArray;
+
+Статический массив
+Point pointArray1[2] = { Point(2,3),Point(3,4) };
+
+#include<array>
+std::array<MyClass,2>pointArray1;
+           тип,кол-во эл-ов
