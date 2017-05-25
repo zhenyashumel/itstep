@@ -64,3 +64,7 @@ Point pointArray1[2] = { Point(2,3),Point(3,4) };
 #include<array>
 std::array<MyClass,2>pointArray1;
            тип,кол-во эл-ов
+           
+           
+ Ключевое слово explicit - запрещает неявное преобразование типов в конструкторе
+ перед конструктором писать explict
