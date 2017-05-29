@@ -1,0 +1,3 @@
+MyClass(const MyClass *myObj)
+MyClass myObject;
+MyClass NewObj=myObj;
