@@ -5,9 +5,9 @@
 class PrettyPrint
 {
 public:
-	PrettyPrint(){};
+	PrettyPrint() {};
 	std::string concatenation(std::string, std::string)const;
 	std::string substitution(std::string);
-	std::string coup(std::string);
+	void coup(std::string*);
 
 };
