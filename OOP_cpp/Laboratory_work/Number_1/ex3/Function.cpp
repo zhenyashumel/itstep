@@ -6,20 +6,23 @@ std::string PrettyPrint::concatenation(std::string a, std::string b)const
 }
 std::string PrettyPrint::substitution(std::string a)
 {
-	return a.replace(a.begin(), a.end(), 'a', 'o');
+	for (std::string::iterator it = a.begin(); it != a.end(); ++it) 
 	
+		if (*it == 'a')*it='o';
+		return a;
 
 }
 
-std::string PrettyPrint::coup(std::string a)
+void PrettyPrint::coup(std::string *a)
 {
-	int a1 = a.size();	
-	int a3 = a1;
-	std::string temp;
-	for (int a2 = 0; a2<a1; a2++, a3--)
-		temp.at(a2) = a.at(a3 - 1);
-	
-	return temp;
+	int a1 = (*a).size();//size of a
+	std::string temp=(*a);//copy a
+	for (int a2 = 0; a2 < (*a).size() / 2; a2++, a1--)//пробегаемся до половины и меняем местами первый и последний элемент
+	{
+		
+		
+		(*a).at(a2)=(*a).at(a1 - 1);
+		(*a).at(a1 - 1) = (temp).at(a2);
+	}
 }
 
-	
