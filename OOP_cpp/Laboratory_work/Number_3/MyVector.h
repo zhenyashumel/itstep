@@ -12,16 +12,10 @@ public:
 		arr = new double[32];
 	}
 
-	MyVector(const MyVector& myObj)
-	{
-		arr = new double[myObj.capacity];
-		size = myObj.size;
-		capacity = myObj.capacity;
-		for (unsigned int i = 0; i < size; ++i)
-		{
-			arr[i] = myObj.arr[i];
-		}
-	}
+	MyVector(const MyVector& myObj);
+	
+	MyVector(MyVector && myObj);
+	
 
 	~MyVector()
 	{
