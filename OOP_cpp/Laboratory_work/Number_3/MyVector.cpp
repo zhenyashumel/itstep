@@ -52,3 +52,22 @@ void MyVector::print()
 		std::cout << arr[i]<<" ";
 	}
 }
+
+MyVector::MyVector(MyVector && myObj):size (myObj.size),capacity (myObj.capacity),arr (myObj.arr)
+{
+	
+	myObj.size = 0;
+	myObj.capacity = 0;
+	myObj.arr = nullptr;
+	std::cout << "Its a MOVE!!!!";
+
+}
+MyVector::MyVector(const MyVector & myObj):size(myObj.size), capacity(myObj.capacity)
+{
+	arr = new double[myObj.capacity];
+	for (unsigned int i = 0; i < size; ++i)
+	{
+		arr[i] = myObj.arr[i];
+	}
+
+}
