@@ -1,0 +1,11 @@
+MyClass operator-() унарный
+Тип    оператор
+MyClass operator-(const MyClass&)
+
+
+Digit operator+(const Digit newDigit)
+	{
+		Digit temp;
+		temp.digit = digit + newDigit.digit;
+		return temp;
+	}
