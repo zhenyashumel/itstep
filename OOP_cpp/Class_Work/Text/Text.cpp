@@ -16,22 +16,29 @@ void Text::function(int a, std::string name )
 	filein.clear();
 	filein.seekg(0);
 	int index = 0;
-	while (filein >> temp)
-	{
-		str[index] = temp;
-		++index;
-	}
+	
 	
 	if (a > counter || a < -1)
 	{
 		std::cout << "Oops... It seems you have entered too much value!!!" << std::endl;
 		return;
 	}
-	filein.clear();
-	filein.seekg(0);
-	for (int i = 0; i < a; ++i)
-		filein >> str[i];
+	else if(a==-1)
+	{ 
+		while (filein >> temp)
+		{
+			str[index] = temp;
+			++index;
+		}
+	}
+	else
+	{
+		for (int i = 0; i < a; ++i)
+			filein >> str[i];
+		
+	}
 	filein.close();
+	
 	
 }
 
