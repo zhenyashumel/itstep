@@ -1,6 +1,6 @@
 #include"Text.h"
 
-void Text::function(int a, std::string name )
+void Text::function(int counter_words, std::string name )
 {
 	std::ifstream filein(name);
 	if (!filein.is_open())
@@ -18,12 +18,12 @@ void Text::function(int a, std::string name )
 	int index = 0;
 	
 	
-	if (a > counter || a < -1)
+	if (counter_words > counter || counter_words < -1)
 	{
 		std::cout << "Oops... It seems you have entered too much value!!!" << std::endl;
 		return;
 	}
-	else if(a==-1)
+	else if(counter_words==-1)
 	{ 
 		while (filein >> temp)
 		{
@@ -48,9 +48,9 @@ Text::Text()
 
 }
 
-Text::Text(int a)
+Text::Text(int counter_words)
 {
-	function(a);
+	function(counter_words);
 }
 
 Text::Text(std::string name)
@@ -58,9 +58,9 @@ Text::Text(std::string name)
 	function(-1,name);
 }
 
-Text::Text(std::string name, int a)
+Text::Text(std::string name, int counter_words)
 {
-	function(a,name);
+	function(counter_words,name);
 }
 
 Text::Text(const Text& m1)
