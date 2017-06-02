@@ -1,5 +1,6 @@
 #include"MyVector.h"
-
+size_t MyVector counterVector=0;
+size_t MyVector counterMaxVector=0 ;
 bool MyVector::empty()
 {
 	return size == 0;
