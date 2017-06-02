@@ -48,5 +48,4 @@ public:
 	void sort();
 
 }; 
-size_t MyVector counterVector=0;
-size_t MyVector counterMaxVector=0 ;
+
