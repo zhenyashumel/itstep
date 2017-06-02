@@ -5,8 +5,8 @@ class MyVector
 	double *arr;
 	unsigned int size;
 	unsigned int capacity = 32;
-	size_t counterVector = 0;
-	size_t counterMaxVector = 0;
+	static size_t counterVector;
+	static size_t counterMaxVector ;
 public:
 	MyVector() : capacity(32), size(0)
 	{
@@ -48,3 +48,5 @@ public:
 	void sort();
 
 }; 
+size_t MyVector counterVector=0;
+size_t MyVector counterMaxVector=0 ;
