@@ -36,12 +36,12 @@ public:
 	void print();
 	double get_min()const ;
 	double get_max()const ;
-	size_t getCounterVector()
+	static size_t getCounterVector()
 	{
 		return counterVector;
 	}
 
-	size_t getCounterMaxVector()
+	static size_t getCounterMaxVector()
 	{
 		return counterMaxVector;
 	}
