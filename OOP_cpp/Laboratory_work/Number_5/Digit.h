@@ -6,9 +6,9 @@ class Digit
 	int digit;
 	static size_t counter;
 public:
-	Digit() :digit(0) 
-	{ 
-		++counter; 
+	Digit() :digit(0)
+	{
+		++counter;
 	}
 	explicit Digit(int x) :digit(x)
 	{
@@ -18,18 +18,18 @@ public:
 	{
 		++counter;
 	}
-	Digit(const Digit &m1) :digit(m1.digit) { ++counter;}
-	Digit( Digit &&m1):digit(m1.digit)
+	Digit(const Digit &m1) :digit(m1.digit) { ++counter; }
+	Digit(Digit &&m1) :digit(m1.digit)
 	{
 		m1.digit = 0;
 		++counter;
-		
+
 	}
 	~Digit()
 	{
 		--counter;
 	}
-	
+
 	int getDigit()
 	{
 		return digit;
@@ -66,15 +66,15 @@ public:
 
 	Digit operator++(int);
 	Digit operator--(int);
-	Digit operator++();
-	Digit operator--();
+	Digit& operator++();
+	Digit& operator--();
 
 	Digit &operator=(const Digit &newDigit);
 	Digit &operator=(Digit &&newDigit);
 
 
 
-	
+
 
 
 
