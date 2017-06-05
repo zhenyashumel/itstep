@@ -9,3 +9,15 @@ Digit operator+(const Digit newDigit)
 		temp.digit = digit + newDigit.digit;
 		return temp;
 	}
+
+operator int()
+{
+	return x;
+}
+
+
+
+void operator()(int x, int y)
+{
+	
+}
