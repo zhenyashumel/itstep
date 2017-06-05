@@ -103,7 +103,7 @@ bool Digit::operator <=(const Digit newDigit)
 
 
 
-Digit Digit:: operator++(int)
+Digit Digit::operator++(int)
 {
 	Digit tmp = *this;
 	tmp.digit++;
@@ -111,25 +111,23 @@ Digit Digit:: operator++(int)
 
 }
 
-Digit Digit:: operator--(int)
+Digit Digit::operator--(int)
 {
-
 	Digit tmp = *this;
 	tmp.digit--;
 	return tmp;
 }
 
-Digit Digit:: operator++()
+Digit& Digit::operator++()
 {
-	digit = digit + 1;
+	++digit;
 	return *this;
 
 }
 
-Digit Digit:: operator--()
+Digit& Digit::operator--()
 {
-
-	digit = digit - 1;
+	--digit;
 	return *this;
 }
 
