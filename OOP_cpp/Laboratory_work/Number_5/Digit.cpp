@@ -24,7 +24,7 @@ Digit Digit:: operator-(const Digit newDigit)
 Digit Digit::operator-(int value)
 {
 	Digit temp;
-	temp.digit = digit -value;
+	temp.digit = digit - value;
 	return temp;
 }
 
@@ -105,7 +105,7 @@ bool Digit::operator <=(const Digit newDigit)
 
 Digit Digit:: operator++(int)
 {
-	Digit tmp = *this; 
+	Digit tmp = *this;
 	tmp.digit++;
 	return tmp;
 
@@ -121,7 +121,7 @@ Digit Digit:: operator--(int)
 
 Digit Digit:: operator++()
 {
-	digit=digit+1;
+	digit = digit + 1;
 	return *this;
 
 }
@@ -129,24 +129,24 @@ Digit Digit:: operator++()
 Digit Digit:: operator--()
 {
 
-	digit=digit-1;
+	digit = digit - 1;
 	return *this;
 }
 
 
-Digit& Digit::operator=( const Digit &newDigit)
+Digit& Digit::operator=(const Digit& newDigit)
 {
-	if (this == &newDigit) 
+	if (this == &newDigit)
 		return *this;
 	digit = newDigit.digit;
 	return *this;
-
-
 }
-Digit &Digit::operator=(Digit &&newDigit)
+
+Digit& Digit::operator=(Digit&& newDigit)
 {
+	if (this == &newDigit)
+		return *this;
 	digit = newDigit.digit;
 	newDigit.digit = 0;
 	return *this;
-
 }
