@@ -14,7 +14,7 @@ MyVector::MyVector(double arr1[], int size1) :size(size1)
 	int counter = size1 / 32;
 
 	arr = new double[(counter + 1) * 32];
-	capacity = 32 * counter;
+	capacity = 32 * (counter+1);
 
 	for (unsigned int i = 0; i < size; ++i)
 		arr[i] = arr1[i];
