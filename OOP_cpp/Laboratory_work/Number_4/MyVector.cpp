@@ -1,23 +1,23 @@
 #include"MyVector.h"
-size_t MyVector counterVector=0;
-size_t MyVector counterMaxVector=0 ;
+size_t MyVector::counterVector = 0;
+size_t MyVector:: counterMaxVector = 0;
 bool MyVector::empty()
 {
 	return size == 0;
 
 }
 
-MyVector::MyVector(double arr1[], int size1):size(size1)
+MyVector::MyVector(double arr1[], int size1) :size(size1)
 {
 	++counterVector;
 	++counterMaxVector;
 	int counter = size1 / 32;
-	
-		arr = new double[(counter+1)*32];
-		capacity = 32*counter;
-		
-		for (unsigned int i = 0; i < size; ++i)
-			arr[i] = arr1[i];		
+
+	arr = new double[(counter + 1) * 32];
+	capacity = 32 * counter;
+
+	for (unsigned int i = 0; i < size; ++i)
+		arr[i] = arr1[i];
 
 }
 
@@ -77,7 +77,7 @@ MyVector::MyVector(MyVector && myObj) :size(myObj.size), capacity(myObj.capacity
 	myObj.arr = nullptr;
 	++counterVector;
 	++counterMaxVector;
-	
+
 
 }
 MyVector::MyVector(const MyVector & myObj) :size(myObj.size), capacity(myObj.capacity)
@@ -119,7 +119,7 @@ double MyVector::get_max()const
 	return max;
 }
 
-void MyVector::sort() 
+void MyVector::sort()
 {
 	for (int d = size / 2; d > 0; d /= 2)
 	{
