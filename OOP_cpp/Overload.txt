@@ -32,3 +32,7 @@ Digit operator+(const int a, const Digit& b)
 	temp.setDigit(a + x);
 	return temp;
 }
+
+
+std::ostream& operator<<( std::ostream&, const Digit&);
+std::istream& operator>>( std::istream&, Digit&);
