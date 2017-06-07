@@ -21,3 +21,14 @@ void operator()(int x, int y)
 {
 	
 }
+
+
+return-type operator+(arg)
+
+Digit operator+(const int a, const Digit& b)
+{
+	Digit temp;
+	int x = b.getDigit();
+	temp.setDigit(a + x);
+	return temp;
+}
