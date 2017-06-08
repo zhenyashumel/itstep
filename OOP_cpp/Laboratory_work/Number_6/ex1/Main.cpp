@@ -49,6 +49,7 @@ void test()
 	}
 	a.setDigit(5);
 	b.setDigit(100);
+	a++;
 	if (a.getDigit()-5==1)
 		std::cout << "Postfix increment and decrement work correctly!!!\n";
 	else
