@@ -24,7 +24,7 @@ Complex operator-(const Complex& m1, const Complex& m2)
 Complex operator*(const Complex& m1, const Complex& m2)
 {
 	float real = (m1.real*m2.real) - (m1.img*m2.img);
-	float img = (m1.img*m2.real) + (m1.real + m2.img);
+	float img = (m1.img*m2.real) + (m1.real * m2.img);
 	return Complex(real, img);
 }
 std::ostream& operator<<(std::ostream& os, const Complex&m1)
