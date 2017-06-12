@@ -1,0 +1,32 @@
+template<typename T>
+
+T getMax(const T first, const T second){
+return (first > second ? first : second);
+}
+
+//main
+
+std::cout << getMax<int>(10, 13) << std::endl;
+std::cout << getMax<double>(10.89, 13.16) << std::endl;
+std::cout << getMax<int>(10.89, 13.16) << std::end;
+
+
+template <typename T>
+тип имя_функции(параметры) {
+// тело_функции
+}
+• начинается с ключевого слова template
+• после слова template в угловых скобках идут
+параметры шаблона
+• обобщенный тип параметра задается с
+помощью ключевого слова typename или class
+
+
+возвращает точно тот же тип, что и у аргумента
+• позволяет указать возвращаемый для
+шаблона функции тип, если он включает
+параметры (хвостовой возвращаемый тип)
+template<typename T, typename U>
+auto f(const T x, const U y) -> decltype(x + y) {
+return x + y;
+}
