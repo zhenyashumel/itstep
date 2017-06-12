@@ -89,6 +89,7 @@ void Printer::printWordsWithStep(int n)
 	}
 	in.close();
 	out.close();
+	delete[]str;
 
 }
 
@@ -111,6 +112,8 @@ void Printer::printReverse()
 		out.put(tmp);
 		--count;
 	}
+	in.close();
+	out.close();
 
 }
 
@@ -184,7 +187,10 @@ void Printer::printСoncordance(std::string word)
 		out << str[search_index + 1] << " " << str[search_index + 2] << " " << str[search_index + 3];
 	}
 
-	
+	in.close();
+	out.close();
+
+	delete[]str;
 
 
 }
@@ -196,4 +202,5 @@ void Printer::getInfo()
 	std::cout << "Date:          " << date << std::endl;
 	std::cout << "Manufacturer:  " << manufacturer << std::endl;
 }
+
 
