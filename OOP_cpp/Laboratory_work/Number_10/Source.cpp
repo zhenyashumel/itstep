@@ -1,7 +1,7 @@
 #include<iostream>
 
-template<typename T,typename U>
-auto getMin(const T first, const U second)->decltype(first+second)
+template<typename T, typename U>
+auto getMin(const T first, const U second)->decltype(first + second)
 {
 	return(first < second ? first : second);
 }
@@ -46,44 +46,52 @@ void sort(T *A, int size)
 
 
 template<typename T>
-T find(T *arr, int size,T value)
+T find(T *arr, int size, T value)
 {
 	for (int i = 0; i < size; ++i)
 	{
 		if (arr[i] == value)
-		{
-			std::cout<<i;
 			return i;
-		}
+		
 	}
 	std::cout << "Number not found!!" << std::endl;
 	return 0;
 }
 
-template<typename T,typename U>
-auto solve(T a, U b)->decltype(a + b)
+template<typename T, typename U>
+T* solve(T a, U b)
 {
-	T arr2[2];
+	T answer[2];
 	if (a == 0)
 	{
-		arr2[0] = 0;
-		return *arr2;
+		answer[0] = 0;
+		return answer;
 	}
 
-		arr2[0] = 1;
-		arr2[1] = (-b / a);
-	return *arr2;
+	answer[0] = 1;
+	answer[1] = ((b*-1) / a);
+	return answer;
+	
 }
-template<typename T>
-auto solve(T a, T b, T c)->decltype(a+b+c)
+template<typename T,typename U,typename X>
+T* solve(T a,  U b, X c)
 {
-	T d = (b*b) - 4 * a * c;
+	T answer[3];
+	auto d = (b*b) - 4 * a * c;
 	if (d < 0)
-		return 0;
+	{
+		answer[0] = 0;
+		return answer;
+	}
 	if (d == 0)
-		return (-b / (2 * a))
-	T x1 = (-b + sqrt(d)) / (2 * a);
-	T x2 = (-b - sqrt(d)) / (2 * a);
+	{
+		answer[0] = 1;
+		answer[1] = (-b / (2 * a));
+		return answer;
+	}
+		
+	answer[0] = 2;
+	answer[1]= (-b + sqrt(d)) / (2 * a);
+	answer[2]= (-b - sqrt(d)) / (2 * a);
+	return answer;
 }
-
-
