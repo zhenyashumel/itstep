@@ -10,46 +10,42 @@ class MyVector
 	static size_t counterVector;
 	static size_t counterMaxVector;
 public:
-	MyVector() : capacity(32), size(0)
-	{
-		arr = new T[32];
-		++counterVector;
-		++counterMaxVector;
-
-	}
+	MyVector();
+	
 	MyVector(T[], int);
 
 	MyVector(const MyVector& myObj);
 
 	MyVector(MyVector && myObj);
 
-
-	~MyVector()
-	{
-		delete[] arr;
-		counterVector -= 1;
-	}
+	~MyVector();
+	
 	bool empty();
+
 	size_t get_size() const;
+
 	unsigned int get_capacity() const;
+
 	void push_back(T value);
+
 	double pop_back();
+
 	double& at(int index);
+
 	void print();
+
 	T get_min()const;
+
 	T get_max()const;
+	
+	static size_t getCounterVector();	
 
-	static size_t getCounterVector()
-	{
-		return counterVector;
-	}
-
-	static size_t getCounterMaxVector()
-	{
-		return counterMaxVector;
-	}
+	static size_t getCounterMaxVector();
+	
 	void sort();
+
 	void insert(T value, size_t index);
+
 	void resize(unsigned int value);
 
 };
@@ -59,6 +55,37 @@ template<typename T>
 size_t MyVector<T>::counterVector = 0;
 template<typename T>
 size_t MyVector<T>::counterMaxVector = 0;
+
+
+template<typename T>
+static size_t MyVector<T>:: getCounterMaxVector()
+{
+	return counterMaxVector;
+}
+
+
+template<typename T>
+static size_t MyVector<T>::getCounterVector()
+{
+	return counterVector;
+}
+
+template<typename T>
+MyVector<T>::~MyVector()
+{
+	delete[] arr;
+	counterVector -= 1;
+}
+
+
+template<typename T>
+MyVector<T>::MyVector() : capacity(32), size(0)
+{
+	arr = new T[32];
+	++counterVector;
+	++counterMaxVector;
+
+}
 
 template<typename T>
 bool MyVector<T>::empty()
@@ -236,7 +263,7 @@ void MyVector<T>::insert(T value, size_t index)
 	else
 	{
 		T *arr1 = new T[capacity];
-		for (unsigned int i = 0; i <=index; ++i)
+		for (unsigned int i = 0; i <= index; ++i)
 			arr1[i] = arr[i];
 		arr1[index + 1] = value;
 		for (unsigned int i = index + 2; i < size; ++i)
@@ -245,7 +272,7 @@ void MyVector<T>::insert(T value, size_t index)
 		arr[size] = value;
 		size = size + 1;
 	}
-	
+
 }
 
 template<typename T>
@@ -262,11 +289,9 @@ void MyVector<T>::resize(unsigned int value)
 
 
 	T *arr1 = new T[value];
-	capacity = value ;
+	capacity = value;
 	for (unsigned int i = 0; i < size; ++i)
 		arr1[i] = arr[i];
 	delete[]arr;
 	arr = arr1;
-	
-
 }
