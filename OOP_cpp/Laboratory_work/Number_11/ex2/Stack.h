@@ -119,6 +119,7 @@ Stack<T>& Stack<T>::operator=(const Stack &obj)
 
 	size = obj.size;
 	capacity = obj.capacity;
+	delete [] stack;
 	stack = new T[obj.capacity];
 	for (size_t i = 0; i < size; ++i)
 		stack[i] = obj.stack[i];
@@ -131,6 +132,7 @@ Stack<T>& Stack<T>::operator=(Stack &&obj)
 {
 	if (&obj == this)
 		return *this;
+	delete [] stack;
 	size = obj.size;
 	capacity = obj.capacity;
 	stack = obj.stack;
