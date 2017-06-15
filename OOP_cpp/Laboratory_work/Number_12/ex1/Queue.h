@@ -1,6 +1,7 @@
 #ifndef __QUEUE_H__
 #define __QUEUE_H__
 #include<iostream>
+
 template <class T>
 class Queue
 {
@@ -23,30 +24,28 @@ public:
 	void pop();
 	T& back();
 	T& front();
-
 };
 
 
 
-
 template<typename T>
-Queue<T>::Queue() :tail(0), capacity(2)
+Queue<T>::Queue() : 
+	tail(0)
+	, capacity(2)
 {
 	data = new T[capacity];
 };
 
 template<typename T>
-Queue<T>::Queue(const Queue<T>&obj)
+Queue<T>::Queue(const Queue<T>& obj) :tail(obj.tail), capacity(obj.capacity)
 {
-	tail = obj.tail;
-	capacity = obj.capacity;
 	data = new T[capacity];
 	for (int i = 0; i < tail; ++i)
 		data[i] = obj.data[i];
 }
 
 template<typename T>
-Queue<T>::Queue(Queue<T> &&obj):tail(obj.tail),capacity(obj.capacity),data(obj.data)
+Queue<T>::Queue(Queue<T>&& obj) : tail(obj.tail), capacity(obj.capacity), data(obj.data)
 {
 	obj.data = nullptr;
 	obj.tail = 0;
@@ -54,10 +53,14 @@ Queue<T>::Queue(Queue<T> &&obj):tail(obj.tail),capacity(obj.capacity),data(obj.d
 }
 
 template<typename T>
-Queue<T>& Queue<T>:: operator=(const Queue<T> &obj)
+Queue<T>& Queue<T>::operator=(const Queue<T>& obj)
 {
+	if (&obj == this)
+		return *this;
+
 	tail = obj.tail;
 	capacity = obj.capacity;
+	delete[]data;
 	data = new T[capacity];
 	for (int i = 0; i < tail; ++i)
 		data[i] = obj.data[i];
@@ -65,8 +68,11 @@ Queue<T>& Queue<T>:: operator=(const Queue<T> &obj)
 }
 
 template<typename T>
-Queue<T>& Queue<T>:: operator=(Queue<T> &&obj)
+Queue<T>& Queue<T>:: operator=(Queue<T>&& obj)
 {
+	if (&obj == this)
+		return *this;
+	delete [] data;
 	tail = obj.tail;
 	capacity = obj.capacity;
 	data = obj.data;
@@ -79,11 +85,11 @@ Queue<T>& Queue<T>:: operator=(Queue<T> &&obj)
 template<typename T>
 Queue<T>::~Queue()
 {
-	delete[]data;
+	delete [] data;
 }
 
 template<typename T>
-size_t Queue<T>:: size() const
+size_t Queue<T>::size() const
 {
 	return tail;
 }
@@ -98,6 +104,10 @@ template<typename T>
 void Queue<T>::clear()
 {
 	tail = 0;
+	delete[] data;
+	capacity = 2;
+	data = new T[capacity];
+	
 }
 
 template<typename T>
@@ -111,9 +121,9 @@ void Queue<T>::push(const T& value)
 
 	else
 	{
-		T *arr = new T[capacity * 2];
 		capacity *= 2;
-
+		T *arr = new T[capacity];
+		
 		for (size_t i = 0; i < tail; ++i)
 			arr[i] = data[i];
 
@@ -121,13 +131,15 @@ void Queue<T>::push(const T& value)
 		data = arr;
 		data[tail] = value;
 		++tail;
-
 	}
 }
 
 template<typename T>
 void Queue<T>::pop()
 {
+	if (empty())
+		return;
+
 	for (size_t i = 0; i < tail - 1; ++i)
 		data[i] = data[i + 1];
 	--tail;	
