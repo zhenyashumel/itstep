@@ -2,7 +2,7 @@
 
 void test()
 {
-	Queue <int> a;
+	Queue<int> a;
 	a.push(5);
 
 
@@ -13,20 +13,20 @@ void test()
 	a.push(10);
 	a.push(16);
 
-	if(a.back()==16)
+	if (a.back() == 16)
 		std::cout << "Test 2: OK!\n";
 	else
 		std::cout << "Test 2: Error!!!\n";
-	
+
 	a.pop();
-	
-	if(a.front()==10)
+
+	if (a.front() == 10)
 		std::cout << "Test 3: OK!\n";
 	else
 		std::cout << "Test 3: Error!!!\n";
 
 	a.clear();
-	if(a.empty())
+	if (a.empty())
 		std::cout << "Test 4: OK!\n";
 	else
 		std::cout << "Test 4: Error!!!\n";
@@ -35,23 +35,40 @@ void test()
 	a.push(10);
 	a.push(15);
 
-	Queue<int>b = a;
-	if(b.front() == a.front())
+	Queue<int> b = a;
+	if (b.front() == a.front())
 		std::cout << "Test 5: OK!\n";
 	else
 		std::cout << "Test 5: Error!!!\n";
 
-	Queue<int>c;
+	Queue<int> c;
 	c = a;
 
 	if (c.front() == a.front())
 		std::cout << "Test 6: OK!\n";
 	else
 		std::cout << "Test 6: Error!!!\n";
+
+	Queue<int> d;
+	d = std::move(a);
+	if(a.empty())
+		std::cout << "Test 7: OK!\n";
+	else
+		std::cout << "Test 7: Error!!!\n";
+
+	a.pop();
+	a.pop();
+	a.pop();
+	a.pop();
+	if (a.empty())
+		std::cout << "Test 8: OK!\n";
+	else
+		std::cout << "Test 8: Error!!!\n";
 	
 
 
-	
+
+
 
 }
 int main()
