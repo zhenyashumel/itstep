@@ -1,3 +1,4 @@
+#pragma once
 #include<iostream>
 
 template<typename T>
@@ -8,58 +9,82 @@ class Stack
 	size_t capacity;
 public:
 
-	Stack() :size(0), capacity(32)
-	{
-		stack = new T[capacity];
-	}
+	Stack();	
 
-	Stack(const Stack &obj) : size(obj.size), capacity(obj.capacity)
-	{
-		stack = new T[capacity];
-		for (size_t i = 0; i < size; ++i)
-			stack[i] = obj.stack[i];
-	}
+	Stack(const Stack &obj);	
 
-	Stack(Stack &&obj) : size(obj.size), capacity(obj.capacity)
-	{
-		stack = obj.stack;
-		obj.size = 0;
-		obj.capacity = 0;
-		obj.stack = nullptr;
-	}
+	Stack(Stack &&obj);
 
-	~Stack()
-	{
-		delete[]stack;
-	}
+	~Stack();	
 
 	Stack& operator=(const Stack &obj);
 
 	Stack& operator=(Stack &&obj);
 
-	bool empty() const
-	{
-		return size == 0;
-	}
+	bool empty() const;	
 
-	size_t getSize() const
-	{
-		return size;
-	}
+	size_t getSize() const;	
 
 	void push(const T value);
+
 	void pop();
-	T top() const
-	{
-		//std::cout << stack[size-1];
-		return stack[size-1];
-	}
+
+	T top() const;	
 
 	bool operator==(const Stack obj);
 
 	bool operator!=(const Stack obj);
-	
+
 };
+
+
+template<typename T>
+T Stack<T>::top() const
+{
+	//std::cout << stack[size-1];
+	return stack[size - 1];
+}
+
+template<typename T>
+size_t Stack<T>:: getSize() const
+{
+	return size;
+}
+
+template<typename T>
+bool Stack<T>:: empty() const
+{
+	return size == 0;
+}
+
+template<typename T>
+Stack<T>::~Stack()
+{
+	delete[]stack;
+}
+
+template<typename T>
+Stack<T>::Stack() :size(0), capacity(32)
+{
+	stack = new T[capacity];
+}
+
+template<typename T>
+Stack<T>::Stack(const Stack &obj): size(obj.size), capacity(obj.capacity)
+{
+	stack = new T[capacity];
+	for (size_t i = 0; i < size; ++i)
+		stack[i] = obj.stack[i];
+}
+
+template<typename T>
+Stack<T>::Stack(Stack &&obj) : size(obj.size), capacity(obj.capacity)
+{
+	stack = obj.stack;
+	obj.size = 0;
+	obj.capacity = 0;
+	obj.stack = nullptr;
+}
 
 
 template<typename T>
@@ -83,7 +108,7 @@ void Stack<T>::push(const T value)
 		stack = arr;
 		stack[size] = value;
 		++size;
-			
+
 	}
 }
 
