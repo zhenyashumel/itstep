@@ -9,6 +9,7 @@ class Pair
 	U second;
 public:
 	Pair() = default;
+	
 	Pair(const T a, const U b);
 
 	~Pair() = default;
