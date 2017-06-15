@@ -9,30 +9,21 @@ class Stack
 	size_t capacity;
 public:
 
-	Stack();	
-
-	Stack(const Stack &obj);	
-
+	Stack();
+	Stack(const Stack &obj);
 	Stack(Stack &&obj);
-
-	~Stack();	
-
+	~Stack();
+	
 	Stack& operator=(const Stack &obj);
-
 	Stack& operator=(Stack &&obj);
-
+	
 	bool empty() const;	
-
 	size_t getSize() const;	
-
 	void push(const T value);
-
 	void pop();
-
 	T top() const;	
-
+	
 	bool operator==(const Stack obj);
-
 	bool operator!=(const Stack obj);
 
 };
