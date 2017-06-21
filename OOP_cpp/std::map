@@ -1,0 +1,27 @@
+#include<map>
+
+operator[ ] ссылка на элемент (если ключа не было, то вставляет его)
+
+count() проверка на вхождение ключа (1, 0)
+
+find() получение итератора для заданного ключа
+
+insert() вставка пары ключ / значение
+
+clear() удаление всех элементов
+
+erase() удаление элемента по итератору или по ключу
+
+size() получение количества элементов
+
+empty() проверка на пустоту
+
+std::map<char, char> myMap = { {'a','z'},{'x','y'} };
+	myMap['A'] = 'S';
+  
+for (auto it = myMap.begin(); it != myMap.end(); ++it)
+std::cout << it->first << " " << it->second<<std::endl;
+
+for (auto pair : myMap)
+		std::cout << pair.first << " " << pair.second << std::endl;
+
