@@ -1,6 +1,7 @@
 #include<iostream>
 #include<set>
 #include<fstream>
+#include<string>
 
 void work()
 {
@@ -25,18 +26,20 @@ void work()
 		return;
 	}
 
+	std::ofstream out("output.txt");
 	while (in >> temp)
-		std::cout << temp << ":  "<< input.count(temp)<<std::endl;
+		out << temp << ":  "<< input.count(temp)<<std::endl;
 			
 	
 	
 	in.close();
+	out.close();
 	
 }
 
 int main()
 {
-	setlocale(0,"");
+	
 	work();
 
 	return 0;
