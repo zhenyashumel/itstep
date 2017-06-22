@@ -24,17 +24,18 @@ void work()
 		std::cout << "Error!!!";
 		return;
 	}
-
+	std::ofstream out("output.txt");
 	while (in >> temp)
 	{
-		std::cout << temp << ": ";
+		out << temp << ": ";
 		if (input.count(temp))
-			std::cout << "Yes" << std::endl;
+			out << "Yes" << std::endl;
 		else
-			std::cout << "No" << std::endl;
+			out << "No" << std::endl;
 			
 	}
 	in.close();
+	out.close();
 	
 }
 
