@@ -1,6 +1,6 @@
 #include"Area.h"
 
-int main()
+void work()
 {
 	std::cout << "Now we will calculate the area of several figures!!" << std::endl << "Press Enter to continue!!!" << std::endl;
 	std::cin.get();
@@ -123,6 +123,10 @@ int main()
 
 	}
 	std::cout << "You calculated the area " << Area::getCounter() << " times";
+}
+int main()
+{
+	work();
 	return 0;
 }
 	
