@@ -93,7 +93,7 @@ void FrequencyDictionary::wordInRange(const int begin, const int end) const
 
 void FrequencyDictionary::partOfSpeech(const std::string part) const
 {
-	std::ofstream out("wordInRange.txt");
+	std::ofstream out("partOfSpeech.txt");
 	for (auto el : dict)
 	{
 		if (el.second.PartOfSpeech == part)
@@ -145,3 +145,5 @@ void FrequencyDictionary::statistics() const
 		out << std::endl;
 	}
 }
+
+
