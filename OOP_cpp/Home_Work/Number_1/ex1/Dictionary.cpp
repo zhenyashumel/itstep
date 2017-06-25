@@ -12,11 +12,11 @@ Dictionary::Dictionary(std::string fname)
 
 	std::cout << "Connect!!! Read the dictionary..." << std::endl;
 
-	std::string rang;
+	std::string rank;
 	std::string word;
 	std::string count;
 
-	while (in >> rang)
+	while (in >> rank)
 	{
 		in >> word;
 		in >> count;
@@ -25,7 +25,7 @@ Dictionary::Dictionary(std::string fname)
 		data.push_back(word);
 		data.push_back(count);
 
-		dict.insert({ rang, data });
+		dict.insert({ rank, data });
 			
 	}
 
@@ -62,11 +62,11 @@ void Dictionary::input(std::string fname)
 
 	std::cout << "Connect!!! Read the dictionary..." << std::endl;
 
-	std::string rang;
+	std::string rank;
 	std::string word;
 	std::string count;
 
-	while (in >> rang)
+	while (in >> rank)
 	{
 		in >> word;
 		in >> count;
@@ -75,7 +75,7 @@ void Dictionary::input(std::string fname)
 		data.push_back(word);
 		data.push_back(count);
 
-		dict.insert({ rang, data });
+		dict.insert({ rank, data });
 
 	}
 }
