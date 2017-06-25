@@ -67,7 +67,7 @@ void work()
 
 		case 6:
 		{
-			std::cout << "Части речи:"
+			std::cout << "Части речи:\n"
 				"Часть речи: a\n"
 				"Часть речи : adv\n"
 				"Часть речи : advpro\n"
@@ -120,4 +120,3 @@ int main()
 
 	return 0;
 }
-	
