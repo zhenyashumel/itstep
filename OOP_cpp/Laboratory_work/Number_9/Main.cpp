@@ -21,14 +21,14 @@ void work()
 		"5. Find the word in the file and output the sentence with it\n"
 		"6. Info about your printer\n"
 		"0. Exit\n";
-	int choise;
+	int choice;
 	
 	bool done = true;
 	while (done)
 	{
-		std::cout << "Your choise: ";
-		std::cin >> choise;
-		switch (choise)
+		std::cout << "Your choice: ";
+		std::cin >> choice;
+		switch (choice)
 		{
 
 
