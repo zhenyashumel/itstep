@@ -4,41 +4,46 @@ template<typename T>
 //здесь работа с питомцем
 void actions(T obj)
 {
-
-	std::cout << "what will we do next ?\n"
-		"1.To talk\n"
-		"2.Say a name\n"
-		"3.Show\n"
-		"4.Get info\n"
-		"5.Nothing" << std::endl;
-	int choice;
-	std::cout << "Your choice: ";
-	std::cin >> choice;
-	switch (choice)
+	bool done = true;
+	while (done)
 	{
+		std::cout << "what will we do next ?\n"
+			"1.To talk\n"
+			"2.Say a name\n"
+			"3.Show\n"
+			"4.Get info\n"
+			"5.Nothing" << std::endl;
+		int choice;
+		std::cout << "Your choice: ";
+		std::cin >> choice;
+		switch (choice)
+		{
 
-	case 1:
-	{
-		obj.sound();
+		case 1:
+		{
+			obj.sound();
 
-	}
-	break;
-
-	case 2:
-		obj.show();
+		}
 		break;
 
-	case 3:
-		obj.type();
-		break;
+		case 2:
+			obj.show();
+			break;
 
-	case 4:
-		obj.info();
-		break;
-	case 5:
-		std::cout << "Goodbye!!!\n";
-		break;
-	default: std::cout << "Enter the correct item of menu!!!\n";
+		case 3:
+			obj.type();
+			break;
+
+		case 4:
+			obj.info();
+			break;
+		case 5:
+			std::cout << "Goodbye!!!\n";
+			done = false;
+			break;
+		default: std::cout << "Enter the correct item of menu!!!\n";
+		}
+		std::cout << std::endl << std::endl;
 	}
 }
 
