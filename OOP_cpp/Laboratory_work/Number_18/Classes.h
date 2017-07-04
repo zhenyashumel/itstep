@@ -40,7 +40,8 @@ class Dog :public Pet
 {
 	std::string colour;
 public:
-	Dog(std::string nam, size_t ag, size_t mas, std::string pol, std::string color):Pet(nam, ag, mas, pol, color)
+	Dog(std::string nam, size_t ag, size_t mas, std::string pol, std::string color):
+		Pet(nam, ag, mas, pol, color)
 	{
 		petType = "Dog";
 	}
@@ -53,7 +54,8 @@ class Cat :public Pet
 {
 	std::string colour;
 public:
-	Cat(std::string nam, size_t ag, size_t mas, std::string pol, std::string color) :Pet(nam, ag, mas, pol, color)
+	Cat(std::string nam, size_t ag, size_t mas, std::string pol, std::string color) :
+		Pet(nam, ag, mas, pol, color)
 	{
 		petType = "Cat";
 	}
@@ -66,7 +68,8 @@ class Hamster :public Pet
 {
 	std::string colour;
 public:
-	Hamster(std::string nam, size_t ag, size_t mas, std::string pol, std::string color) :Pet(nam, ag, mas, pol, color)
+	Hamster(std::string nam, size_t ag, size_t mas, std::string pol, std::string color) :
+		Pet(nam, ag, mas, pol, color)
 	{
 		petType = "Hamster";
 	}
@@ -78,7 +81,8 @@ class Parrot :public Pet, public Bird
 {
 	std::string colour;
 public:
-	Parrot(std::string nam, size_t ag, size_t mas, std::string pol, std::string color,bool can, int sp) :Pet(nam, ag, mas, pol, color)
+	Parrot(std::string nam, size_t ag, size_t mas, std::string pol, std::string color,bool can, int sp) :
+		Pet(nam, ag, mas, pol, color)
 	{
 		petType = "Parrot";
 		fly = can;
