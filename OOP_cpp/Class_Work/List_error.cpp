@@ -31,10 +31,22 @@ public:
 private:
 	node* create_node(const T&);
 	void create_first_node(const T&);
-	//node* find_node(const T&);
+	node* find_node(const T&);
 	//node* find_previous_node(const T&);
 };
 
+template<typename T>
+typename ForwardList<T>::node* ForwardList<T>::find_node(const T&val)
+{
+	node *ptr = head;
+	while (ptr != nullptr)
+	{
+		if (ptr->data == val)
+			return ptr;
+	}
+	
+	return nullptr;
+}
 template<typename T>
 typename ForwardList<T>::node* ForwardList<T>::create_node(const T& val)
 {
@@ -46,7 +58,7 @@ typename ForwardList<T>::node* ForwardList<T>::create_node(const T& val)
 }
 
 template<typename T>
-ForwardList<T>::ForwardList(): head(nullptr), tail(nullptr), list_size(0)
+ForwardList<T>::ForwardList() : head(nullptr), tail(nullptr), list_size(0)
 {
 
 }
@@ -96,7 +108,7 @@ void ForwardList<T>::push_front(const T& val)
 	if (empty())
 	{
 		create_first_node(val);
-		
+
 	}
 	else
 	{
@@ -120,7 +132,7 @@ T ForwardList<T>::pop_front()
 		return data;
 	}
 	else throw std::logic_error("empty_list");
-	
+
 
 }
 
@@ -130,7 +142,7 @@ T ForwardList<T>::pop_back()
 {
 	if (!empty())
 	{
-		
+
 		node* ptr = head;
 		while (ptr->next->next != nullptr)
 			ptr = ptr->next;
@@ -158,34 +170,26 @@ void ForwardList<T>::print()
 template<typename T>
 bool ForwardList<T>::insert(const T& val, const T& wher)
 {
-	
+
 	if (empty()) return false;
-			
+	if (wher == tail->data)
+		push_back(val);
+
 	else
 	{
-		node* ptr = head;
-		while (ptr != nullptr)
+		
+		node* ptr = find_node(wher);
+		if (ptr == nullptr)
 		{
-			if (ptr->data == wher)
-			{
-
-				node* cur = create_node(val);
-				node* temp = ptr;
-				cur->next = temp->next;
-				temp->next = cur;
-
-				return true;
-			}
-					
+			return false;
 		}
-		return false;
-		
+		node *cur = create_node(val);
+		cur->next = ptr->next;
+		ptr->next = cur;
+		return true;
 
-
-
-		
-	}
-	return false;
+	}		
+		return false;	
 }
 
 template<typename T>
@@ -199,7 +203,7 @@ bool ForwardList<T>::erase(const T& val)
 		node* tmp = ptr;
 		while (ptr->next != nullptr)
 		{
-			
+
 			if (ptr->data == val)
 			{
 				node* temp = ptr;
@@ -207,7 +211,7 @@ bool ForwardList<T>::erase(const T& val)
 				delete ptr;
 				return true;
 			}
-			 tmp = ptr;
+			tmp = ptr;
 		}
 	}
 	return false;
