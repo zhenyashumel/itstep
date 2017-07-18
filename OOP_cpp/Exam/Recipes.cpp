@@ -26,8 +26,6 @@ Recipes::Recipes()
 }
 
 
-
-
 void Recipes::recipe_generation()
 {
 	last_recipe.clear();
@@ -35,19 +33,12 @@ void Recipes::recipe_generation()
 	std::string temp;
 	std::string str="";
 	last_recipe.push_back(book[rand() % 15]);
-		
-	
-		
 	
 	for (int i = 0; i < 10; ++i)
 	{
-
-		last_recipe.push_back(book[rand() % book.size()]);
-		
+		last_recipe.push_back(book[rand() % book.size()]);		
 	}
-	last_recipe.push_back("Приятного аппетита!!!");
-	
-	
+	last_recipe.push_back("Приятного аппетита!!!");	
 }
 
 void Recipes::print_recipe() const
