@@ -11,22 +11,21 @@ Recipes::Recipes()
 	std::ifstream in("Recipes.txt");
 	if (!in.is_open()) throw std::logic_error("File isn't open!!!\n");
 
-	std::string temp;
-	std::string str;
-	std::string next;
+	std::string temp;//сюда считываем слово
+	std::string next; //это следующее слово
 	std::cout << "Загрузка...\n\n\n";
 	in >> temp;
 	while (in >> next )
 	{
-		if (next[0] != '(' && next[next.length() ] != ')')
+		if (next[0] != '(' && next[next.length() ] != ')') //убираем слова со скобочками
 		{
 			auto it = book.find(temp);
-			if (it == book.end())
+			if (it == book.end()) //если слова нет
 			{
 				std::map<std::string, int> cur = { { next, 1 } };
 				book.insert({ temp, cur });
 			}
-			else
+			else //если есть
 			{
 				if (it->second.find(next) != it->second.end())
 					it->second[next] = it->second[next] + 1;
@@ -50,7 +49,7 @@ void Recipes::recipe_generation(const int quantity)
 	srand((unsigned)time(0));
 	std::string maax;	
 	auto it = book.begin();
-	for (int i = 0; i < rand() % 900 + 100; ++it, ++i);
+	for (int i = 0; i < rand() % 900 + 100; ++it, ++i);// рандомное первое слово
 	last_word = it->first;
 	last_recipe.push_back(last_word);	
 
@@ -58,20 +57,20 @@ void Recipes::recipe_generation(const int quantity)
 	{
 		int max = 0;
 		int counter = 0;
-		for (auto el : book[last_word])
+		for (auto el : book[last_word])//ищем слово , которое чаще всего встречается после передедущего слова
 		{
 			max = el.second;
 			maax = el.first;
 			counter += el.second;					
 		}
 		
-		book[last_word].erase(maax);
-		last_word = maax;
-		if (last_recipe[last_recipe.size() - 1] != last_word)
+		book[last_word].erase(maax);//удаляем его, чтобы не повторялось
+		last_word = maax; //сохраняем это слово
+		if (last_recipe[last_recipe.size() - 1] != last_word) // проверяем , не повторяется ли это слово
 			last_recipe.push_back(last_word);
 		
 	}
-	std::string last = last_recipe.back();
+	std::string last = last_recipe.back();// здесь мы добавляем в конце рецепта 
 	last_recipe.pop_back();
 	if (last[last.length() - 1] == '.')
 		last_recipe.push_back(last);
