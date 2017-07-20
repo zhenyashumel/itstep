@@ -6,11 +6,10 @@
 class Recipes
 {
 public:
-	std::map < std::string, std::map < std::string, int>> book;
-	std::vector<std::string> last_recipe;
-	std::string last_word;
-	std::vector<std::string> often;
-
+	std::map < std::string, std::map < std::string, int>> book;//здесь хранится список всех слов и слов , которые  повторяются после их
+	std::vector<std::string> last_recipe; //сюда записывается рецепт
+	std::string last_word; //последнее слово  (нужно для генерации)
+	
 public:
 
 	Recipes();
