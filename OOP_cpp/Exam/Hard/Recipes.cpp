@@ -47,8 +47,10 @@ void Recipes::recipe_generation(const int quantity)
 	
 	last_recipe.clear();
 	srand((unsigned)time(0));
+
 	std::string maax;	
 	auto it = book.begin();
+
 	for (int i = 0; i < rand() % 900 + 100; ++it, ++i);// рандомное первое слово
 	last_word = it->first;
 	last_recipe.push_back(last_word);	
@@ -67,23 +69,28 @@ void Recipes::recipe_generation(const int quantity)
 		book[last_word].erase(maax);//удаляем его, чтобы не повторялось
 		last_word = maax; //сохраняем это слово
 		if (last_recipe[last_recipe.size() - 1] != last_word) // проверяем , не повторяется ли это слово
-			last_recipe.push_back(last_word);
-		
+			last_recipe.push_back(last_word);		
 	}
+
+
 	std::string last = last_recipe.back();// здесь мы добавляем в конце рецепта 
 	last_recipe.pop_back();
+
 	if (last[last.length() - 1] == '.')
 		last_recipe.push_back(last);
+
 	else
 	{
 		if (last[last.length() - 1] == ',')
 			last[last.length() - 1] = '.';
+
 		else
 		{
 			last += '.';
 			last_recipe.push_back(last);
 		}
 	}
+
 	last_recipe.push_back("Приятного аппетита!!!");
 
 }
@@ -103,9 +110,11 @@ void Recipes::finput_recipe() const
 	std::string name;
 	std::cin >> name;
 	name += ".txt";
+
 	std::ofstream out(name);
 	for (int i = 0; i < last_recipe.size(); ++i)
 		out << last_recipe[i] << " ";
+
 	std::cout << "Рецепт успешно записан в файл\n";
 }
 
@@ -116,6 +125,7 @@ void Recipes::several_recipes(const int quantity, int count)
 	std::string name;
 	std::cin >> name;
 	name += ".txt";
+
 	std::ofstream out(name);
 	for (int i = 1; i <= count; ++i)
 	{
