@@ -58,12 +58,15 @@ void Recipes::recipe_generation(const int quantity)
 	for (int i = 0; i < quantity - 1; ++i)
 	{
 		int max = 0;
-		int counter = 0;
+		
 		for (auto el : book[last_word])//ищем слово , которое чаще всего встречается после передедущего слова
 		{
-			max = el.second;
-			maax = el.first;
-			counter += el.second;					
+			if (max < el.second)
+			{
+				max = el.second;
+				maax = el.first;
+			}
+								
 		}
 		
 		book[last_word].erase(maax);//удаляем его, чтобы не повторялось
