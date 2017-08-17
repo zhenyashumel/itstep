@@ -9,7 +9,7 @@
 class Dictionary
 {
 
-	std::map<std::string, std::vector<std::string> > dict;
+	std::map<std::string, int > dict;
 	std::string out = ""; //здесь хранятся результаты всех операций , которые(при желании) будем записывать в файл 
 
 public:
@@ -21,5 +21,5 @@ public:
 	void bestWord();
 	void input(std::string);
 	void write();
-	
+
 };
