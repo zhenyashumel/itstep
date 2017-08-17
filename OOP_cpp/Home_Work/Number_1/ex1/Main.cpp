@@ -22,7 +22,7 @@ void work()
 
 		switch (choise)
 		{
-		case 1: 
+		case 1:
 		{
 			std::cout << "Hello. Please enter a filename: ";
 			std::string name;
@@ -40,13 +40,18 @@ void work()
 		std::cin.get();
 		std::cin.get();
 	}
-	
+
 }
 int main()
 {
 	//rang , word, frequency
-	work();
-	
+	//work();
+
+	Dictionary obj("Text.txt");
+
+	obj.print();
+
+
 
 	return 0;
 
