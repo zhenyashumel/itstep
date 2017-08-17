@@ -19,7 +19,6 @@ public:
 
 	void print();
 	void bestWord();
-	void input(std::string);
 	void write();
 
 };
