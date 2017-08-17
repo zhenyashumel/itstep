@@ -65,6 +65,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 	RECT rect;
 	HDC hdc;
 	PAINTSTRUCT ps;
+	HWND hWndStat;
 	SystemParametersInfo(SPI_GETWORKAREA, 0, &rect, 0);
 	int x, y;
 	switch (uMessage)
@@ -95,10 +96,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 		SetClassLong(hWnd, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256)));
 		InvalidateRect(hWnd, NULL, true);
 		SetTimer(hWnd, setColor, 1000, NULL);
+
+		hWndStat = CreateWindowEx(WS_EX_TOPMOST, L"Static", L"Element", WS_CHILD | WS_VISIBLE,
+			10, 20, 55,20, hWnd, NULL, GetModuleHandle(NULL), NULL);		
 		break;
 
-
-
+	
 	case WM_SYSKEYDOWN:
 
 		if (wParam == VK_DOWN)
