@@ -12,28 +12,21 @@ void work()
 	while (done)
 	{
 		std::cout << "What will we do next ?\n"
-			"1. Will we read the dictionary from another file\n"
-			"2. Output the contents of the dictionary\n"
-			"3. The most common word\n"
-			"4. Write the result to a file\n"
-			"5. Exit\n";
+			"1. Output the contents of the dictionary\n"
+			"2. The most common word\n"
+			"3. Write the result to a file\n"
+			"4. Exit\n";
 		std::cout << "Your choise: ";
 		std::cin >> choise;
 
 		switch (choise)
 		{
-		case 1:
-		{
-			std::cout << "Hello. Please enter a filename: ";
-			std::string name;
-			std::cin >> name;
-			obj.input(name);
-		}
+		
 		break;
-		case 2: obj.print(); break;
-		case 3: obj.bestWord(); break;
-		case 4:obj.write(); break;
-		case 5: done = false; break;
+		case 1: obj.print(); break;
+		case 2: obj.bestWord(); break;
+		case 3:obj.write(); break;
+		case 4: done = false; break;
 		default:std::cout << "Enter the correct menu item!!!\n";
 		}
 		std::cout << "Press Enter to continue...";
@@ -44,12 +37,11 @@ void work()
 }
 int main()
 {
+	setlocale(0, "");
 	//rang , word, frequency
-	//work();
+	work();
+	
 
-	Dictionary obj("Text.txt");
-
-	obj.print();
 
 
 
