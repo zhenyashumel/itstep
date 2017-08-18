@@ -34,15 +34,39 @@ void work()
 		if (el.size() > max)
 			max = el.size();
 	}
-
+	 int counterMax = 0;
 	out << "Самые длинные слова: длина " << max << std::endl;
 	for (auto el : text)
 	{
 		if (el.size() == max)
+		{
 			out << el << std::endl;
+			++counterMax;
+		}
+	}
+	out << "Их количество: " << counterMax;
+
+	out << std::endl << std::endl;
+
+
+	int min = text.front().size();
+	for (auto el : text)
+	{
+		if (el.size() < min)
+			min = el.size();
 	}
 
-
+	int counterMin = 0;
+	out << "Самые короткие слова: длина " << min << std::endl;
+	for (auto el : text)
+	{
+		if (el.size() == min)
+		{
+			out << el << std::endl;
+			++counterMin;
+		}
+	}
+	out << "Их количество: " << counterMin;
 }
 
 
