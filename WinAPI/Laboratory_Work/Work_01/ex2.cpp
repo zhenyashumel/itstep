@@ -66,7 +66,17 @@ void work()
 			++counterMin;
 		}
 	}
-	out << "Их количество: " << counterMin;
+	out << "Их количество: " << counterMin << std::endl;
+
+
+	int size = 0;
+	int del = 0;
+	for (auto el : text)
+	{
+		size += el.size();
+		++del;
+	}
+	out << "Средняя длина слов: " << size / del;
 }
 
 
