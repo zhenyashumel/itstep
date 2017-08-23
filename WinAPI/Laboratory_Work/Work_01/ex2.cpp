@@ -3,6 +3,7 @@
 #include<fstream>
 #include<string>
 #include<vector>
+#include<set>
 
 void work()
 {
@@ -15,7 +16,7 @@ void work()
 
 	std::vector<std::wstring> text;
 
-	std::wofstream out("Output.txt");
+	std::wofstream out("result.txt");
 	if (!out.is_open())
 	{
 		std::cout << "Error!!!";
@@ -34,7 +35,7 @@ void work()
 		if (el.size() > max)
 			max = el.size();
 	}
-	 int counterMax = 0;
+	int counterMax = 0;
 	out << "Самые длинные слова: длина " << max << std::endl;
 	for (auto el : text)
 	{
@@ -57,12 +58,18 @@ void work()
 	}
 
 	int counterMin = 0;
+	std::set<std::wstring> mini;
 	out << "Самые короткие слова: длина " << min << std::endl;
 	for (auto el : text)
 	{
 		if (el.size() == min)
 		{
-			out << el << std::endl;
+			if (!mini.count(el))
+			{
+				out << el << std::endl;
+				mini.insert(el);
+			}
+				
 			++counterMin;
 		}
 	}
@@ -77,6 +84,7 @@ void work()
 		++del;
 	}
 	out << "Средняя длина слов: " << size / del;
+
 }
 
 
