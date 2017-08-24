@@ -1,0 +1,8 @@
+﻿  Source.cpp
+c:\users\zhenya\documents\visual studio 2017\projects\win32project6\win32project6\source.cpp(89): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\time.h(505): note:  см. объявление "localtime"
+c:\users\zhenya\documents\visual studio 2017\projects\win32project6\win32project6\source.cpp(72): warning C4101: hWndStat: неиспользованная локальная переменная
+c:\users\zhenya\documents\visual studio 2017\projects\win32project6\win32project6\source.cpp(78): warning C4101: y: неиспользованная локальная переменная
+c:\users\zhenya\documents\visual studio 2017\projects\win32project6\win32project6\source.cpp(78): warning C4101: x: неиспользованная локальная переменная
+  Win32Project6.vcxproj -> c:\users\zhenya\documents\visual studio 2017\Projects\Win32Project6\Debug\Win32Project6.exe
+  Win32Project6.vcxproj -> c:\users\zhenya\documents\visual studio 2017\Projects\Win32Project6\Debug\Win32Project6.pdb (Partial PDB)
