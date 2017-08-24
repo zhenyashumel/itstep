@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <windows.h>
 #include <tchar.h>
 #include"resource.h"
@@ -78,7 +79,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 	int x, y;
 	switch (uMessage)
 	{
-		
+
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 		GetClientRect(hWnd, &rect);
@@ -98,7 +99,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 
 		str += ':';
 
-		if(tim->tm_min >= 10)
+		if (tim->tm_min >= 10)
 			str += std::to_wstring(tim->tm_min);
 		else
 		{
@@ -107,7 +108,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 		}
 		str += ':';
 
-		if(tim->tm_sec >= 10)
+		if (tim->tm_sec >= 10)
 			str += std::to_wstring(tim->tm_sec);
 		else
 		{
@@ -115,20 +116,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 			str += std::to_wstring(tim->tm_sec);
 		}
 
-			
+
 		DrawText(hdc, str.c_str(), -1, &rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		EndPaint(hWnd, &ps);
 		break;
 
 
-	
+
 	case WM_CREATE:
 		SetTimer(hWnd, DestroyTimer, 10000, NULL);
 		SetTimer(hWnd, TimerTime, 1000, NULL);
 		srand((unsigned)time(0));
 		SetClassLong(hWnd, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256)));
 		InvalidateRect(hWnd, NULL, true);
-			
+
 		break;
 
 
@@ -136,14 +137,17 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 		HCURSOR hCurs;
 		hCurs = LoadCursor(NULL, IDC_ARROW);
 		SetCursor(hCurs);
+		SetClassLong(hWnd, GCL_HCURSOR, (LONG)LoadCursor(NULL, IDC_ARROW));
 		//SendMessage(hWnd, WM_SETCURSOR, wParam, LPARAM(IDC_ARROW));
 		break;
 
 
 	case WM_LBUTTONDBLCLK:
 		HCURSOR hCurs1;
-		hCurs1 = LoadCursor(GetModuleHandle(NULL), MAKEINTRESOURCE(102));
-		SetCursor(hCurs1);
+		
+		SetClassLong(hWnd, GCL_HCURSOR, (LONG)LoadCursor(GetModuleHandle(NULL), MAKEINTRESOURCE(102)));
+		//SetClassLong(hWnd, GCL_HCURSOR, (LONG)LoadCursor(NULL, IDC_CROSS));
+				
 		break;
 
 
@@ -174,7 +178,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 		else if (wParam == VK_F4)
 			PostMessage(hWnd, WM_CLOSE, 0, 0);
 		break;
-		
+
 
 
 
@@ -222,27 +226,27 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 		else if (wParam == TimerTime)
 		{
 			RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE | RDW_ERASE | RDW_UPDATENOW);
-			
+
 		}
 		else if (wParam == move)
 		{
-		
-			 if (rect1.top == 0 && rect1.right != rect.right)
+
+			if (rect1.top == 0 && rect1.right != rect.right)
 			{
-				 pos = 0;
-				 pos1 = rect.right - width;
+				pos = 0;
+				pos1 = rect.right - width;
 				MoveWindow(hWnd, pos2++, 0, width, height, true);
 			}
-			
-			 else if (pos1 == 0)
+
+			else if (pos1 == 0)
 			{
 				MoveWindow(hWnd, pos1, pos--, width, height, true);
 			}
-			
+
 
 			else if (pos == rect.bottom - height)
 				MoveWindow(hWnd, pos1--, pos, width, height, true);
-			
+
 			else if (rect1.right == rect.right)
 			{
 				pos2 = 0;
