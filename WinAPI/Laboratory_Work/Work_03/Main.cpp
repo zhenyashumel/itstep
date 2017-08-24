@@ -2,12 +2,14 @@
 #include <tchar.h>
 #include"resource.h"
 #include<ctime>
+#include<string>
+
 #define width  200
 #define height  100
-#define closeTimer 1
+#define TimerTime 555
 #define DestroyTimer 2
-#define setColor 228
-#define move 288
+#define move 5536
+
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -21,7 +23,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpszCmdLine, 
 	wnd.cbWndExtra = 0;
 	wnd.hInstance = hInstance;
 	wnd.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(101));
-	wnd.hCursor = LoadCursor(hInstance, MAKEINTRESOURCE(103));
+	wnd.hCursor = LoadCursor(hInstance, MAKEINTRESOURCE(102));
 	wnd.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	wnd.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
 	wnd.lpszMenuName = NULL;
@@ -62,46 +64,102 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpszCmdLine, 
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 {
-	RECT rect;
+	RECT rect, rect1;
+	SystemParametersInfo(SPI_GETWORKAREA, 0, &rect, 0);
+	GetWindowRect(hWnd, &rect1);
 	HDC hdc;
 	PAINTSTRUCT ps;
 	HWND hWndStat;
-	SystemParametersInfo(SPI_GETWORKAREA, 0, &rect, 0);
+	static int pos = 0, pos1 = rect.right - width, pos2 = 0;
+	static struct tm *tim;
+	static time_t tt;
+	std::wstring str;
+
 	int x, y;
 	switch (uMessage)
 	{
-
-
+		
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 		GetClientRect(hWnd, &rect);
 		SetTextColor(hdc, RGB(50, 205, 50));
 		SetBkMode(hdc, TRANSPARENT);
-		DrawText(hdc, L"Sample Text!!!", -1, &rect, DT_CENTER);
+
+		tt = time(NULL);
+		tim = localtime(&tt);
+
+		if (tim->tm_hour >= 10)
+			str += std::to_wstring(tim->tm_hour);
+		else
+		{
+			str += '0';
+			str += std::to_wstring(tim->tm_hour);
+		}
+
+		str += ':';
+
+		if(tim->tm_min >= 10)
+			str += std::to_wstring(tim->tm_min);
+		else
+		{
+			str += '0';
+			str += std::to_wstring(tim->tm_min);
+		}
+		str += ':';
+
+		if(tim->tm_sec >= 10)
+			str += std::to_wstring(tim->tm_sec);
+		else
+		{
+			str += '0';
+			str += std::to_wstring(tim->tm_sec);
+		}
+
+			
+		DrawText(hdc, str.c_str(), -1, &rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 		EndPaint(hWnd, &ps);
 		break;
 
-	case WM_LBUTTONDOWN:
-		x = LOWORD(lParam);
-		y = HIWORD(lParam);
-		MoveWindow(hWnd, x, y, 300, 300, true);
-		break;
 
-
-
-
+	
 	case WM_CREATE:
-		SetTimer(hWnd, closeTimer, 1500, NULL);
+		SetTimer(hWnd, DestroyTimer, 10000, NULL);
+		SetTimer(hWnd, TimerTime, 1000, NULL);
 		srand((unsigned)time(0));
 		SetClassLong(hWnd, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256)));
 		InvalidateRect(hWnd, NULL, true);
-		SetTimer(hWnd, setColor, 1000, NULL);
-
-		hWndStat = CreateWindowEx(WS_EX_TOPMOST, L"Static", L"Element", WS_CHILD | WS_VISIBLE,
-			10, 20, 55,20, hWnd, NULL, GetModuleHandle(NULL), NULL);		
+			
 		break;
 
-	
+
+	case WM_LBUTTONDOWN:
+		HCURSOR hCurs;
+		hCurs = LoadCursor(NULL, IDC_ARROW);
+		SetCursor(hCurs);
+		//SendMessage(hWnd, WM_SETCURSOR, wParam, LPARAM(IDC_ARROW));
+		break;
+
+
+	case WM_LBUTTONDBLCLK:
+		HCURSOR hCurs1;
+		hCurs1 = LoadCursor(GetModuleHandle(NULL), MAKEINTRESOURCE(102));
+		SetCursor(hCurs1);
+		break;
+
+
+	case WM_RBUTTONDOWN:
+		SetClassLong(hWnd, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256)));
+		InvalidateRect(hWnd, NULL, true);
+		break;
+
+
+	case WM_RBUTTONDBLCLK:
+		SetClassLong(hWnd, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(255, 255, 255)));
+		InvalidateRect(hWnd, NULL, true);
+		break;
+
+
+
 	case WM_SYSKEYDOWN:
 
 		if (wParam == VK_DOWN)
@@ -114,20 +172,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 			ShowWindow(hWnd, SW_NORMAL);
 
 		else if (wParam == VK_F4)
-			PostMessage(hWnd, WM_CLOSE, 0, 0);			
+			PostMessage(hWnd, WM_CLOSE, 0, 0);
 		break;
+		
 
 
 
 
 	case WM_KEYDOWN:
-				
+
 		if (wParam == VK_RETURN)
 		{
-			
-			MoveWindow(hWnd, rect.right - width , 0, width, height, true);
-			SetTimer(hWnd, move, 1, NULL);
-		}		
+
+			MoveWindow(hWnd, rect.right - width, 0, width, height, true);
+			SetTimer(hWnd, move, 10, NULL);
+		}
+		else if (wParam == VK_ESCAPE)
+		{
+			KillTimer(hWnd, move);
+			pos = 0;
+			pos1 = rect.right - width;
+			pos2 = 0;
+		}
 		break;
 
 
@@ -143,19 +209,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 
 
 	case WM_TIMER:
-		
-		if (wParam == move)
-		{
-			//if()
-		}
 
-		if (wParam == closeTimer)
-		{
-			KillTimer(hWnd, closeTimer);
-			SetTimer(hWnd, DestroyTimer, 10000, NULL);
-		}
-
-		else if (wParam == DestroyTimer)
+		if (wParam == DestroyTimer)
 		{
 			KillTimer(hWnd, DestroyTimer);
 			if (MessageBox(hWnd, _TEXT("Xотите завершить работу приложения?"), _TEXT("Информация"), MB_YESNO) == IDYES) {
@@ -164,10 +219,35 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 			}
 		}
 
-		if (wParam == setColor)
-		{			
-			SetClassLong(hWnd, GCL_HBRBACKGROUND, (LONG)CreateSolidBrush(RGB(rand() % 256, rand() % 256, rand() % 256)));
-			InvalidateRect(hWnd, NULL, true);
+		else if (wParam == TimerTime)
+		{
+			RedrawWindow(hWnd, NULL, NULL, RDW_INVALIDATE | RDW_ERASE | RDW_UPDATENOW);
+			
+		}
+		else if (wParam == move)
+		{
+		
+			 if (rect1.top == 0 && rect1.right != rect.right)
+			{
+				 pos = 0;
+				 pos1 = rect.right - width;
+				MoveWindow(hWnd, pos2++, 0, width, height, true);
+			}
+			
+			 else if (pos1 == 0)
+			{
+				MoveWindow(hWnd, pos1, pos--, width, height, true);
+			}
+			
+
+			else if (pos == rect.bottom - height)
+				MoveWindow(hWnd, pos1--, pos, width, height, true);
+			
+			else if (rect1.right == rect.right)
+			{
+				pos2 = 0;
+				MoveWindow(hWnd, rect.right - width, pos++, width, height, true);
+			}
 		}
 		break;
 
@@ -175,12 +255,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 
 	case WM_CLOSE:
 		if (MessageBox(hWnd, _TEXT("Вы действительно хотите завершить работу приложения?"), _TEXT("Информация"), MB_YESNO) == IDYES) {
-			
+
 			PostQuitMessage(0);
 		}
 		break;
 
-	
+
 	default:
 		return DefWindowProc(hWnd, uMessage, wParam, lParam);
 	}
