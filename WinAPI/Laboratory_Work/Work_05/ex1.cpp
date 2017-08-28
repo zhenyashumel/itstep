@@ -186,7 +186,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			L"STATIC",
 			L"Здесь появится ответ",
 			WS_CHILD | WS_VISIBLE | SS_CENTER | SS_CENTERIMAGE,
-			10, 210, 280, 40,
+			15, 210, 280, 40,
 			hWnd,
 			(HMENU)StatAnswer,
 			GetModuleHandle(NULL),
@@ -228,6 +228,31 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			{
 				GetWindowText(edit1, str1, sizeof(str1));
 				GetWindowText(edit2, str2, sizeof(str2));
+
+				std::wstring x = str1;
+				std::wstring y = str2;
+
+				if ((x == L"" || x == L" ") && (y == L"" || y == L" "))
+				{
+					SetWindowText(stat3, L"Вы забыли заполнить поля!!");
+					break;
+				}
+
+				else if (x == L"" || x == L" ")
+				{
+					SetWindowText(stat3, L"Вы забыли ввести первое слово!!!");
+					break;
+				}
+
+				
+
+				else if (y == L"" || y == L" ")
+				{
+					SetWindowText(stat3, L"Вы забыли ввести второе слово!!!");
+					break;
+				}
+					
+
 				bool check = true;
 				for (int i = 0; str1[i] != '\0'; ++i)
 				{
@@ -269,6 +294,11 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				bool flag = true;
 				GetWindowText(edit1, str1, sizeof(str1));
 				std::wstring str = str1;
+				if (str == L"" || str == L" ")
+				{
+					SetWindowText(stat3, L"Вы забыли ввести слово!!!");
+					break;
+				}
 				for (auto it = str.begin(); it != str.end(); ++it)
 				{
 					if (*it == ' ' || *it == '.' || *it == ',' || *it == '!' || *it == '?' || *it == ';')
@@ -278,7 +308,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					}
 						
 				}
-				for (int i = 0, j = str.size() - 1 ; i != str.size() / 2 -1 ; ++i, --j)
+				for (int i = 0, j = str.size() - 1 ; i != str.size() / 2  ; ++i, --j)
 				{
 					if (str[i] != str[j])
 						flag = false;
@@ -298,7 +328,11 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			SetWindowText(edit2, L"");
 
 		}
-    break;
+
+			
+
+	break;
+
 		
 
 	case WM_DESTROY:
