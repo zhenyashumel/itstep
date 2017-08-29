@@ -119,7 +119,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		edit1 = CreateWindowEx(WS_EX_TOPMOST,
 			L"EDIT",
 			L"",
-			WS_CHILD | WS_VISIBLE | WS_BORDER,
+			WS_CHILD | WS_VISIBLE | WS_BORDER | ES_LOWERCASE,
 			120, 25, 170, 23,
 			hWnd,
 			(HMENU) Edit1,
@@ -129,7 +129,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		edit2 = CreateWindowEx(WS_EX_TOPMOST,
 			L"EDIT",
 			L"",
-			WS_CHILD | WS_VISIBLE | WS_BORDER,
+			WS_CHILD | WS_VISIBLE | WS_BORDER | ES_LOWERCASE,
 			120, 63, 170, 23,
 			hWnd,
 			(HMENU)Edit1,
@@ -151,7 +151,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		but2 = CreateWindowEx(WS_EX_TOPMOST,
 			L"BUTTON",
 			L"Палиндром",
-			WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON ,
+			WS_CHILD | WS_VISIBLE | BS_RADIOBUTTON  ,
 			193, 100, 100, 50,
 			hWnd,
 			(HMENU)Button2,
@@ -232,6 +232,26 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				std::wstring x = str1;
 				std::wstring y = str2;
 
+				for (auto it = x.begin(); it != x.end(); ++it)
+				{
+					if (*it == ' ' )
+					{
+						x.erase(it);
+						--it;
+					}
+
+				}
+
+				for (auto it = y.begin(); it != y.end(); ++it)
+				{
+					if (*it == ' ')
+					{
+						y.erase(it);
+						--it;
+					}
+
+				}
+
 				if ((x == L"" || x == L" ") && (y == L"" || y == L" "))
 				{
 					SetWindowText(stat3, L"Вы забыли заполнить поля!!");
@@ -294,20 +314,23 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 				bool flag = true;
 				GetWindowText(edit1, str1, sizeof(str1));
 				std::wstring str = str1;
-				if (str == L"" || str == L" ")
-				{
-					SetWindowText(stat3, L"Вы забыли ввести слово!!!");
-					break;
-				}
+			
 				for (auto it = str.begin(); it != str.end(); ++it)
 				{
 					if (*it == ' ' || *it == '.' || *it == ',' || *it == '!' || *it == '?' || *it == ';')
 					{
 						str.erase(it);
 						--it;
-					}
-						
+					}									
+					
 				}
+
+				if (str == L"" || str == L" ")
+				{
+					SetWindowText(stat3, L"Вы забыли ввести слово!!!");
+					break;
+				}
+			
 				for (int i = 0, j = str.size() - 1 ; i != str.size() / 2  ; ++i, --j)
 				{
 					if (str[i] != str[j])
