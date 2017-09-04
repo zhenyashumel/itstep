@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\zhenya\desktop\win32project13\win32project13\source.cpp(33): error C2664: "HWND CreateDialogParamW(HINSTANCE,LPCWSTR,HWND,DLGPROC,LPARAM)": невозможно преобразовать аргумент 4 из "BOOL (__cdecl *)(HWND,UINT,WPARAM,LPARAM)" в "DLGPROC"
+  c:\users\zhenya\desktop\win32project13\win32project13\source.cpp(33): note: Конечному типу не соответствует ни одной функции с данным именем в области видимости
+c:\users\zhenya\desktop\win32project13\win32project13\source.cpp(46): warning C4244: return: преобразование "WPARAM" в "int", возможна потеря данных
