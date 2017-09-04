@@ -7,7 +7,7 @@
 #include"resource.h"
 #define GameOver 876
 #define ProgressTimer 228
-#define Get(id)  GetDlgItem(hWnd, id)  //Вместо GetDlgItem
+#define Get(id)  GetDlgItem(hWnd, id)  //Р’РјРµСЃС‚Рѕ GetDlgItem
 
 
 void sort(std::vector<int> &A, int size) 
@@ -54,14 +54,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE prevInstance, LPSTR lpCmdLine,
 
 BOOL CALLBACK DlgProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 {
-	static int timer; //Время
-	static int count; //Сколько уже угадали
-	static int index_now; //Номер числа , которое нажимает пользователь(по счету)
-	static std::vector<int> numb; // массив рандомных чисел
+	static int timer; //Р’СЂРµРјСЏ
+	static int count; //РЎРєРѕР»СЊРєРѕ СѓР¶Рµ СѓРіР°РґР°Р»Рё
+	static int index_now; //РќРѕРјРµСЂ С‡РёСЃР»Р° , РєРѕС‚РѕСЂРѕРµ РЅР°Р¶РёРјР°РµС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ(РїРѕ СЃС‡РµС‚Сѓ)
+	static std::vector<int> numb; // РјР°СЃСЃРёРІ СЂР°РЅРґРѕРјРЅС‹С… С‡РёСЃРµР»
 	static HWND list, edit, spin, prog;
-	static std::vector<HWND> buttons;// дескрипторы кнопок
-	int pos; //позиция для работы со счетчиком
-	std::wstring str; //для счётчика
+	static std::vector<HWND> buttons;// РґРµСЃРєСЂРёРїС‚РѕСЂС‹ РєРЅРѕРїРѕРє
+	int pos; //РїРѕР·РёС†РёСЏ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃРѕ СЃС‡РµС‚С‡РёРєРѕРј
+	std::wstring str; //РґР»СЏ СЃС‡С‘С‚С‡РёРєР°
 	HMENU hMenu;
 
 	switch (iMsg)
@@ -76,7 +76,7 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		SendMessage(spin, UDM_SETBUDDY, WPARAM(edit), 0);
 		SendMessage(spin, UDM_SETRANGE32, 0, 1000);
 
-		for (int i = 0, id = 1032; i < 16; ++i, ++id) // id ставил свои , поэтому 1032
+		for (int i = 0, id = 1032; i < 16; ++i, ++id) // id СЃС‚Р°РІРёР» СЃРІРѕРё , РїРѕСЌС‚РѕРјСѓ 1032
 		{
 			buttons.push_back(Get(id));
 			EnableWindow(buttons[i], false);
@@ -92,9 +92,9 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			SendMessage(hWnd, WM_COMMAND, WPARAM(ButtonStart), 0);
 
 		else if (LOWORD(wParam) == ID_ABOUT)
-			MessageBox(hWnd, L"Смысл игры в том, чтобы за указанное время успеть щёлкнуть по всем кнопкам в порядке возрастания чисел.\n\n\t\tZhenyaProduction, Inc.", L"О программе", NULL);
+			MessageBox(hWnd, L"РЎРјС‹СЃР» РёРіСЂС‹ РІ С‚РѕРј, С‡С‚РѕР±С‹ Р·Р° СѓРєР°Р·Р°РЅРЅРѕРµ РІСЂРµРјСЏ СѓСЃРїРµС‚СЊ С‰С‘Р»РєРЅСѓС‚СЊ РїРѕ РІСЃРµРј РєРЅРѕРїРєР°Рј РІ РїРѕСЂСЏРґРєРµ РІРѕР·СЂР°СЃС‚Р°РЅРёСЏ С‡РёСЃРµР».\n\n\t\tZhenyaProduction, Inc.", L"Рћ РїСЂРѕРіСЂР°РјРјРµ", NULL);
 
-		if (LOWORD(wParam) == ButtonStart) //нажатие на кнопку "Начать игру"
+		if (LOWORD(wParam) == ButtonStart) //РЅР°Р¶Р°С‚РёРµ РЅР° РєРЅРѕРїРєСѓ "РќР°С‡Р°С‚СЊ РёРіСЂСѓ"
 		{
 			numb.clear();
 			numb.shrink_to_fit();
@@ -107,25 +107,25 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			std::wstring temp = buf;
 			if (temp == L"")
 			{
-				MessageBox(hWnd, L"Введите верное время (не больше 1000)", L"Информация", NULL);
+				MessageBox(hWnd, L"Р’РІРµРґРёС‚Рµ РІРµСЂРЅРѕРµ РІСЂРµРјСЏ (РЅРµ Р±РѕР»СЊС€Рµ 1000)", L"РРЅС„РѕСЂРјР°С†РёСЏ", NULL);
 				return true;
 			}
 			timer = stoi(temp);
 
 			if (timer < 0 || timer > 1000 )
 			{
-				MessageBox(hWnd, L"Введите верное время (не больше 1000)", L"Информация", NULL);
+				MessageBox(hWnd, L"Р’РІРµРґРёС‚Рµ РІРµСЂРЅРѕРµ РІСЂРµРјСЏ (РЅРµ Р±РѕР»СЊС€Рµ 1000)", L"РРЅС„РѕСЂРјР°С†РёСЏ", NULL);
 				return true;
 			}
 
 			srand((unsigned)time(0));
-			for (int i = 0; i < 16; ++i)//рандомим числа
+			for (int i = 0; i < 16; ++i)//СЂР°РЅРґРѕРјРёРј С‡РёСЃР»Р°
 			{
 				numb.push_back(rand() % 100);
 			}
 
 
-			for (int i = 0; i < buttons.size(); ++i)//заполняем кнопки
+			for (int i = 0; i < buttons.size(); ++i)//Р·Р°РїРѕР»РЅСЏРµРј РєРЅРѕРїРєРё
 			{
 				std::wstring  str = std::to_wstring(numb[i]);
 				SetWindowText(buttons[i], str.c_str());
@@ -142,7 +142,7 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		}
 
 
-		else if (HIWORD(wParam) == EN_CHANGE) // изменения в поле для времени(для счетчика)
+		else if (HIWORD(wParam) == EN_CHANGE) // РёР·РјРµРЅРµРЅРёСЏ РІ РїРѕР»Рµ РґР»СЏ РІСЂРµРјРµРЅРё(РґР»СЏ СЃС‡РµС‚С‡РёРєР°)
 		{
 			wchar_t buf1[5];
 			GetWindowText(edit, buf1, 5);
@@ -155,9 +155,9 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		}
 	
 
-		for (int i = 0, id = 1032; i < 16; ++i, ++id) //пробегаемся по всем кнопкам
+		for (int i = 0, id = 1032; i < 16; ++i, ++id) //РїСЂРѕР±РµРіР°РµРјСЃСЏ РїРѕ РІСЃРµРј РєРЅРѕРїРєР°Рј
 		{
-			if (LOWORD(wParam) == id) // любая из кнопок с числами
+			if (LOWORD(wParam) == id) // Р»СЋР±Р°СЏ РёР· РєРЅРѕРїРѕРє СЃ С‡РёСЃР»Р°РјРё
 			{
 				wchar_t buf1[5];
 				GetWindowText(Get(id), buf1, 5);
@@ -173,7 +173,7 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					{
 						KillTimer(hWnd, ProgressTimer);
 						KillTimer(hWnd, GameOver);
-						MessageBox(hWnd, L"Поздравляю , ты выиграл!!!", L"Информация", MB_OK);
+						MessageBox(hWnd, L"РџРѕР·РґСЂР°РІР»СЏСЋ , С‚С‹ РІС‹РёРіСЂР°Р»!!!", L"РРЅС„РѕСЂРјР°С†РёСЏ", MB_OK);
 					}
 				}
 				else
@@ -184,7 +184,7 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 					{
 						EnableWindow(buttons[i], false);
 					}
-					MessageBox(hWnd, L"Игра проиграна!!!", L"Информация", MB_OK);
+					MessageBox(hWnd, L"РРіСЂР° РїСЂРѕРёРіСЂР°РЅР°!!!", L"РРЅС„РѕСЂРјР°С†РёСЏ", MB_OK);
 				}
 			}
 		}
@@ -193,7 +193,7 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 		return true;
 
 		
-	case  WM_VSCROLL: //счетчик
+	case  WM_VSCROLL: //СЃС‡РµС‚С‡РёРє
 		pos = SendMessage(spin, UDM_GETPOS32, 0, 0); 
 		str = std::to_wstring(pos);
 		SetWindowText(edit, str.c_str());
@@ -213,7 +213,7 @@ BOOL CALLBACK DlgProc(HWND hWnd, UINT iMsg, WPARAM wParam, LPARAM lParam)
 			{
 				EnableWindow(buttons[i], false);
 			}
-			MessageBox(hWnd, L"Игра проиграна", L"Конец игры", NULL);
+			MessageBox(hWnd, L"РРіСЂР° РїСЂРѕРёРіСЂР°РЅР°", L"РљРѕРЅРµС† РёРіСЂС‹", NULL);
 		}
 
 		return true;
