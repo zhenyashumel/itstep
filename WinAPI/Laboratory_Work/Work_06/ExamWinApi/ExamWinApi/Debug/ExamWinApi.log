@@ -1,0 +1,6 @@
+﻿  Source.cpp
+c:\users\zhenya\documents\visual studio 2017\projects\examwinapi\examwinapi\source.cpp(132): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\zhenya\documents\visual studio 2017\projects\examwinapi\examwinapi\source.cpp(240): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\zhenya\documents\visual studio 2017\projects\examwinapi\examwinapi\source.cpp(259): warning C4101: buf1: неиспользованная локальная переменная
+  ExamWinApi.vcxproj -> C:\Users\Zhenya\documents\visual studio 2017\Projects\ExamWinApi\Debug\ExamWinApi.exe
+  ExamWinApi.vcxproj -> C:\Users\Zhenya\documents\visual studio 2017\Projects\ExamWinApi\Debug\ExamWinApi.pdb (Partial PDB)
