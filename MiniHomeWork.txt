@@ -1,0 +1,23 @@
+
+CREATE PROCEDURE AddOrder @idClient int, @idProduct int, @count int
+	
+AS
+BEGIN
+	insert into Orders values
+	(
+		GetDate(),
+		1,
+		(select Price from Products where Product_Id = @idProduct),
+		@idClient
+	 )
+
+	 insert into OrdersList values
+	(
+		@idProduct,
+		@@identity,
+		@count
+	)
+		
+
+END
+GO
